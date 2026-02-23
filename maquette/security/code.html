@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AudioPlay - Sécurité</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a140d",
+                        "neutral-dark": "#162a1c",
+                        "border-dark": "#28392e",
+                        "card-dark": "rgba(22, 42, 28, 0.6)",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            @apply font-sans bg-background-dark text-slate-100;
+        }
+        .glass-panel {
+            background: rgba(22, 42, 28, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(13, 242, 89, 0.1);
+        }
+        .sidebar-item-active {
+            @apply bg-primary/10 text-primary border-r-2 border-primary;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            @apply bg-primary;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            @apply translate-x-5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<header class="w-full border-b border-solid border-border-dark px-6 md:px-10 py-4 flex items-center justify-between bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight font-display">AudioPlay</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-dark">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">Alexandre D.</p>
+<p class="text-[10px] text-primary uppercase tracking-wider">Premium</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwOQ-9TyhM-odJuhNR3hAFpSEGtUR1rH_4Wsaf42l9FhaHe5oJFKnOtx-Kpluotm9fImo9JNxXxShcppkQElkcAoziABxDYS9j4W3nQHZ_pUMcp3ONXrPrRvnuEvcSMZfxO1LN_FBrYsN23ZxDlRD5csDcFJN769DVCkp8Ykc0oMo-8nQ7SLZ8ZZPyMwfc5xAZVhQmW7K8VNc6swCZG1Xl4NBjAKk3THeXg_KyLanaQ5joANxl3fA7GvrIJLHkbumVCEE2Skk3Pxfe");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 border-r border-border-dark hidden lg:flex flex-col py-8 bg-background-dark/40">
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-medium">Profil</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 sidebar-item-active transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-medium">Sécurité</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Paiements</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Préférences</span>
+</a>
+</nav>
+<div class="mt-auto px-8">
+<button class="flex items-center gap-4 py-3 text-red-400 hover:text-red-300 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Déconnexion</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-dark relative">
+<div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-4xl mx-auto p-6 md:p-10 space-y-8 relative z-10">
+<div class="pb-6 border-b border-border-dark">
+<h1 class="text-3xl font-bold font-display">Sécurité du compte</h1>
+<p class="text-slate-400 mt-2">Gérez vos paramètres de sécurité et surveillez l'activité de votre compte.</p>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">lock</span>
+<h3 class="text-lg font-bold font-display">Gestion du mot de passe</h3>
+</div>
+<div class="p-4 rounded-lg bg-background-dark/40 border border-border-dark">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<p class="text-sm font-medium text-slate-200">Mot de passe local</p>
+<p class="text-xs text-slate-500 mt-1">Utilisez un mot de passe spécifique à AudioPlay même avec la connexion sociale.</p>
+</div>
+<button class="px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20 transition-all rounded-lg text-sm font-bold">
+                                    Définir un mot de passe
+                                </button>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<h3 class="text-lg font-bold font-display">Double Authentification</h3>
+</div>
+<div class="relative inline-block w-10 align-middle select-none">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer outline-none transition-transform duration-200 ease-in z-10" id="2fa-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-600 cursor-pointer transition-colors duration-200 ease-in" for="2fa-toggle">
+<span class="toggle-dot"></span>
+</label>
+</div>
+</div>
+<p class="text-sm text-slate-400">Ajoutez une couche de sécurité supplémentaire en demandant un code lors de la connexion.</p>
+<div class="flex items-center gap-2 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<span class="material-symbols-outlined text-primary !text-sm">info</span>
+<p class="text-[11px] text-slate-300">Recommandé pour protéger vos achats.</p>
+</div>
+</section>
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">visibility_off</span>
+<h3 class="text-lg font-bold font-display">Confidentialité</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Profil public</span>
+<input checked="" class="rounded bg-background-dark border-border-dark text-primary focus:ring-primary/20" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Afficher mes écoutes</span>
+<input class="rounded bg-background-dark border-border-dark text-primary focus:ring-primary/20" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Masquer mes badges</span>
+<input class="rounded bg-background-dark border-border-dark text-primary focus:ring-primary/20" type="checkbox"/>
+</div>
+</div>
+</section>
+</div>
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">history</span>
+<h3 class="text-lg font-bold font-display">Historique de connexion</h3>
+</div>
+<button class="text-xs text-slate-400 hover:text-primary transition-colors uppercase font-bold tracking-widest">Tout déconnecter</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b border-border-dark">
+<tr>
+<th class="pb-3 text-[10px] text-slate-500 uppercase tracking-widest font-bold">Appareil</th>
+<th class="pb-3 text-[10px] text-slate-500 uppercase tracking-widest font-bold">Localisation</th>
+<th class="pb-3 text-[10px] text-slate-500 uppercase tracking-widest font-bold">Dernière activité</th>
+<th class="pb-3 text-[10px] text-slate-500 uppercase tracking-widest font-bold text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark/50">
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">desktop_windows</span>
+<div class="text-sm">Chrome on Windows</div>
+</div>
+</td>
+<td class="py-4 text-sm text-slate-400">Paris, FR</td>
+<td class="py-4 text-sm text-slate-400">Maintenant</td>
+<td class="py-4 text-right">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Actuel</span>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">smartphone</span>
+<div class="text-sm">iPhone 14 Pro</div>
+</div>
+</td>
+<td class="py-4 text-sm text-slate-400">Abidjan, CI</td>
+<td class="py-4 text-sm text-slate-400">Il y a 2 heures</td>
+<td class="py-4 text-right">
+<button class="text-red-400 hover:text-red-300 transition-colors text-[10px] font-bold uppercase tracking-wider underline">Révoquer</button>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">laptop_mac</span>
+<div class="text-sm">MacBook Pro 16"</div>
+</div>
+</td>
+<td class="py-4 text-sm text-slate-400">Paris, FR</td>
+<td class="py-4 text-sm text-slate-400">Hier, 18:42</td>
+<td class="py-4 text-right">
+<button class="text-red-400 hover:text-red-300 transition-colors text-[10px] font-bold uppercase tracking-wider underline">Révoquer</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<p class="text-center text-[10px] text-slate-500 uppercase tracking-widest pt-10">
+                    AudioPlay Security v2.4.0 • Dernière mise à jour: Aujourd'hui à 10:24
+                </p>
+</div>
+</main>
+</div>
+<footer class="w-full py-4 px-10 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 bg-background-dark">
+<p class="text-xs text-slate-500">© 2024 AudioPlay. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+</div>
+</footer>
+
+</body></html>

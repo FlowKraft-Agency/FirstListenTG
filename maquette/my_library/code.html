@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ma Musique - AudioApp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a0f0c",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .glass-card {
+            @apply bg-white/5 border border-white/10 backdrop-blur-md;
+        }
+        .track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .status-ready {
+            @apply bg-primary/20 text-primary border border-primary/30;
+        }
+        .status-played {
+            @apply bg-white/5 text-slate-500 border border-white/10 grayscale;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 min-h-screen flex flex-col selection:bg-primary selection:text-background-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<header class="flex items-center justify-between border-b border-white/10 px-6 py-4 md:px-20 lg:px-40 bg-background-dark/80 backdrop-blur-xl sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AudioApp</h2>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Explorer</a>
+<a class="text-primary transition-colors text-sm font-bold border-b-2 border-primary pb-1" href="#">Ma Musique</a>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 hover:bg-white/10 transition-all border border-white/10">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/30 p-0.5 overflow-hidden cursor-pointer hover:border-primary transition-all">
+<img alt="User Profile" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_BtyotMuUB82Pya9zWasWws4xbXtE9E9wlLSrVy8fveA_it3-uIIFVdBygSFnWihM5n_okOv2Yzi4FxMvdIHrC6aL2G561nZSWMK-dumj4aKBMOY3wOOlg7FWS-ZolEHAbZ_H4l6zPaeg4Qe_5nZds4AydW7qsLz9erL5bp21EzW0VKISSbvu2beA96rRf9H1LTWaZGiTy4M-Jr8_v5RMr6ozWMfaDd7j-w2wikxI51G2Tp42_xYQV7OGWXy0fLIx4Eteyp4x0Tb"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 md:px-20 lg:px-40 py-12 relative z-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-2 italic">Ma Musique</h1>
+<p class="text-slate-400 max-w-md">Retrouvez tous vos titres achetés. Chaque morceau est une expérience unique.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 items-center">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xl">search</span>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all" placeholder="Rechercher un titre..." type="text"/>
+</div>
+<div class="flex bg-white/5 p-1 rounded-xl border border-white/10 shrink-0">
+<button class="px-5 py-1.5 rounded-lg text-sm font-bold bg-primary text-background-dark shadow-lg shadow-primary/20 transition-all">Nouveaux</button>
+<button class="px-5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all">Historique</button>
+</div>
+</div>
+</div>
+<div class="track-grid">
+<div class="glass-card group rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Midnight Pulse" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9QScEsgYt1UvdWrz1yCZcf-VNghpgD4-g6nEMms0_S2iySAN4z21hH4xS2uio0ikUFZ1zB60UMekah179ww_NJBVFa5VKbH_-sUlucgIO19oKEtMZxV44Vddjj3t6PVX_EOXA3p9PYT_mZwqiuCnZa1C2Q8gJ_HEYKtDtWM9Y0p7m_tVUttwkJ4RFL2NaIbi3l4s6HegJA8U0qXH28OF5wCp2CAv94QcVcvpZD7TRomWQMviCD0Ljxm3ohAtWK8rJn_zeitNHaf_M"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-background-dark w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-primary/40 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl font-bold">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-3 right-3">
+<span class="status-ready text-[10px] uppercase font-black px-2 py-1 rounded-md backdrop-blur-md">Prêt à l'écoute</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors">Midnight Pulse</h3>
+<p class="text-slate-400 text-sm">Aura Neon</p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-[10px] text-slate-500 font-mono">ID: #AP-8821</span>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<div class="glass-card group rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col opacity-80">
+<div class="relative aspect-square overflow-hidden grayscale">
+<img alt="Cyber Wave" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4J_bWo1OCvU6QNJqgMFUMjAU-8rLB5jLwH56f9SrIYRWBTyUoad6JXpWyrO7A5wxbVrqlp42NTNatZuVApxPz0Mpe44ad7Bzlkw7WX57_pJzBDg5m57S6BtcoZFRvUaWWWr3y_dhZSphCKZQuEqUGoo2sVw4xTPHty2uq2r5gctPFEuhLUjAKqvhTHBfHJCotevq4FVQmiyBySz8azh5eovmcNj-Yjrj4SjbQeUKd33WqPWpKrJQRWAuvlYQ0bhoDYxVcMDTjI4xv"/>
+<div class="absolute top-3 right-3">
+<span class="status-played text-[10px] uppercase font-black px-2 py-1 rounded-md backdrop-blur-md">Déjà écouté</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold mb-1 text-slate-400">Synth Horizon</h3>
+<p class="text-slate-500 text-sm">Vector Zero</p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-[10px] text-slate-600 font-mono">ID: #AP-4402</span>
+<span class="text-[10px] font-bold text-slate-600 uppercase">Archive</span>
+</div>
+</div>
+</div>
+<div class="glass-card group rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Vibe One" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3JlifN80FYH-NRsjFc7D1C4RwfiuT21Yv-wUrdCf5jG6_WGTVWqTK0vymJOJvED5Rr2VzCRonMr4ooAn63j09W8ScLPvHhN-griRls3CUBMPBf2-Blrdy--eOFDoHKVyOYqESe8hd0fiuM3WkQKWtzIYZe8XfSJq3Zz0O3BDiqucE7_am2rD2PNiIRtSaISUYK8fmtNPWmFCC-YkZJDP1aZIzdya0L5GZs-i1W_uzCkGMyPgUrHRI3YQg8HcAX1ND2kgH6l1s-_fX"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-background-dark w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-primary/40 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl font-bold">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-3 right-3">
+<span class="status-ready text-[10px] uppercase font-black px-2 py-1 rounded-md backdrop-blur-md">Prêt à l'écoute</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors">Echoes of Gold</h3>
+<p class="text-slate-400 text-sm">Luna Ray</p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-[10px] text-slate-500 font-mono">ID: #AP-9128</span>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden flex-col items-center justify-center py-20 text-center">
+<div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10 relative">
+<span class="material-symbols-outlined text-5xl text-slate-600">library_music</span>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark text-xs font-bold">add</span>
+</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">Votre bibliothèque est vide</h3>
+<p class="text-slate-400 max-w-sm mb-8">Commencez à collectionner des titres uniques et profitez d'une expérience d'écoute exclusive.</p>
+<button class="bg-primary hover:bg-primary/90 text-background-dark px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
+                    Explorer le catalogue
+                </button>
+</div>
+</main>
+<footer class="mt-auto px-6 md:px-20 lg:px-40 py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-600 text-xs tracking-wide">© 2024 AudioApp. Chaque morceau est une pièce unique de votre collection.</p>
+<div class="flex gap-6 text-slate-500 text-xs font-medium">
+<a class="hover:text-primary transition-colors" href="#">Conditions</a>
+<a class="hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</footer>
+</div>
+
+</body></html>

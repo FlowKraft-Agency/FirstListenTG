@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paiement Sécurisé - AudioApp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-white/10 px-6 py-4 md:px-20 lg:px-40 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AudioApp</h2>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="hover:text-primary transition-colors text-sm font-medium" href="#">Explorer</a>
+<a class="hover:text-primary transition-colors text-sm font-medium" href="#">Ma Musique</a>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 hover:bg-white/10 transition-all border border-white/10">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/30 p-0.5 overflow-hidden">
+<img alt="User Profile" class="w-full h-full rounded-full object-cover" data-alt="Avatar circular image of a user profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_BtyotMuUB82Pya9zWasWws4xbXtE9E9wlLSrVy8fveA_it3-uIIFVdBygSFnWihM5n_okOv2Yzi4FxMvdIHrC6aL2G561nZSWMK-dumj4aKBMOY3wOOlg7FWS-ZolEHAbZ_H4l6zPaeg4Qe_5nZds4AydW7qsLz9erL5bp21EzW0VKISSbvu2beA96rRf9H1LTWaZGiTy4M-Jr8_v5RMr6ozWMfaDd7j-w2wikxI51G2Tp42_xYQV7OGWXy0fLIx4Eteyp4x0Tb"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex items-center justify-center p-4 md:p-8">
+<div class="max-w-xl w-full bg-white/5 border border-white/10 rounded-xl p-6 md:p-10 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="relative z-10">
+<div class="mb-8">
+<h1 class="text-3xl font-black tracking-tighter mb-2">Finaliser votre achat</h1>
+<p class="text-slate-400 text-sm">Paiement sécurisé pour votre titre unique.</p>
+</div>
+<!-- Summary Card -->
+<div class="bg-white/5 rounded-lg p-5 mb-8 border border-white/10 flex flex-col sm:flex-row items-center gap-5">
+<div class="w-full sm:w-32 aspect-square rounded-lg overflow-hidden bg-slate-800">
+<img alt="Cover" class="w-full h-full object-cover" data-alt="Neon abstract music album cover with vibrant colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9QScEsgYt1UvdWrz1yCZcf-VNghpgD4-g6nEMms0_S2iySAN4z21hH4xS2uio0ikUFZ1zB60UMekah179ww_NJBVFa5VKbH_-sUlucgIO19oKEtMZxV44Vddjj3t6PVX_EOXA3p9PYT_mZwqiuCnZa1C2Q8gJ_HEYKtDtWM9Y0p7m_tVUttwkJ4RFL2NaIbi3l4s6HegJA8U0qXH28OF5wCp2CAv94QcVcvpZD7TRomWQMviCD0Ljxm3ohAtWK8rJn_zeitNHaf_M"/>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<h3 class="text-xl font-bold leading-none mb-1">Midnight Pulse</h3>
+<p class="text-slate-400 text-sm mb-4">Aura Neon - Cyber Wave</p>
+<div class="inline-flex items-center gap-2 bg-primary/20 text-primary px-3 py-1 rounded-full text-lg font-bold">
+                                100 FCFA
+                            </div>
+</div>
+</div>
+<!-- Payment Method Selection -->
+<div class="space-y-4 mb-8">
+<p class="text-sm font-semibold uppercase tracking-widest text-slate-500">Mode de paiement</p>
+<div class="grid grid-cols-2 gap-4">
+<!-- Method 1 -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="payment" type="radio" value="yas"/>
+<div class="h-24 flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-white/10 bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-white/10">
+<div class="h-8 w-auto flex items-center justify-center">
+<!-- Placeholder for Yas Logo -->
+<span class="text-xl font-black text-slate-300 peer-checked:text-primary">Mixx <span class="text-primary italic">Yas</span></span>
+</div>
+<span class="text-xs font-medium text-slate-500">Mobile Money</span>
+</div>
+<div class="absolute top-2 right-2 text-primary opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</label>
+<!-- Method 2 -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="payment" type="radio" value="flooz"/>
+<div class="h-24 flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-white/10 bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-white/10">
+<div class="h-8 w-auto flex items-center justify-center">
+<!-- Placeholder for Flooz Logo -->
+<span class="text-xl font-black text-slate-300">Flooz</span>
+</div>
+<span class="text-xs font-medium text-slate-500">Moov Money</span>
+</div>
+<div class="absolute top-2 right-2 text-primary opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Input Phone -->
+<div class="mb-8">
+<label class="block text-sm font-medium text-slate-400 mb-2" for="phone">Numéro de téléphone</label>
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500 pointer-events-none">+228</span>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg py-4 pl-16 pr-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-white text-lg tracking-widest placeholder:text-slate-700" id="phone" placeholder="90 00 00 00" type="tel"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark py-5 rounded-lg font-bold text-lg transition-all shadow-[0_0_20px_rgba(13,242,89,0.3)] hover:shadow-[0_0_30px_rgba(13,242,89,0.5)] flex items-center justify-center gap-2">
+<span>Confirmer le paiement</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Status Indicator (Wait state) -->
+<div class="mt-8 pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-4 text-center opacity-60">
+<div class="relative flex items-center justify-center">
+<div class="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin"></div>
+<div class="absolute w-12 h-12 rounded-full border border-primary/10 animate-pulse"></div>
+</div>
+<div>
+<p class="text-white font-medium">En attente de confirmation...</p>
+<p class="text-xs text-slate-500 mt-1">Validez la transaction sur votre téléphone</p>
+</div>
+</div>
+<!-- Security Footer -->
+<div class="mt-8 flex items-center justify-center gap-6 text-slate-500 text-[10px] uppercase tracking-widest">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Cryptage SSL 256-bit</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span>Paiement Sécurisé</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Info -->
+<footer class="p-8 text-center text-slate-600 text-xs">
+<p>© 2024 AudioApp Inc. Tous droits réservés. Conditions d'utilisation • Confidentialité</p>
+</footer>
+</div>
+</body></html>

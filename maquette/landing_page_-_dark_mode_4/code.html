@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exclusive Audio - Expérience Unique</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#080c09",
+                        "surface-dark": "#121a14",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(18, 26, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(13, 242, 89, 0.1);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(13, 242, 89, 0.4);
+        }
+        .bg-abstract {
+            background: radial-gradient(circle at 50% 50%, rgba(13, 242, 89, 0.15) 0%, rgba(8, 12, 9, 1) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col selection:bg-primary/30">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-background-dark p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl font-bold">graphic_eq</span>
+</div>
+<span class="text-xl font-bold tracking-tight uppercase">Exclusive<span class="text-primary">Audio</span></span>
+</div>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Explorer</a>
+<a class="hover:text-primary transition-colors" href="#">Comment ça marche</a>
+<a class="hover:text-primary transition-colors" href="#">Aide</a>
+</div>
+<button class="bg-white/5 hover:bg-white/10 text-white px-6 py-2 rounded-full text-sm font-bold transition-all border border-white/10">
+                Connexion
+            </button>
+</div>
+</nav>
+<main class="flex-grow pt-20 relative overflow-hidden bg-abstract">
+<!-- Decorative Background Element -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-5xl mx-auto px-6 py-12 md:py-24 relative z-10">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<!-- Hero Left: Content -->
+<div class="flex flex-col gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Sortie Exclusive
+                    </div>
+<h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white">
+                        Écoutez ce son <span class="text-primary">exclusif</span> maintenant
+                    </h1>
+<p class="text-xl text-slate-400 font-light leading-relaxed max-w-lg">
+                        Disponible pour une écoute unique après paiement. Vivez une expérience sonore inédite en haute définition.
+                    </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<span class="text-4xl font-bold text-white">100 FCFA</span>
+<div class="h-8 w-px bg-white/10"></div>
+<div class="flex items-center gap-2 text-slate-400 text-sm">
+<span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+                                Paiement Sécurisé
+                            </div>
+</div>
+<button class="neon-glow group relative flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-background-dark font-bold text-lg px-10 py-5 rounded-xl transition-all active:scale-95 w-full md:w-fit">
+<span>Payer et écouter</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center gap-4 mt-2 opacity-60 grayscale hover:grayscale-0 transition-all">
+<img alt="Orange Money" class="h-6" data-alt="Orange Money payment logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPk98_BMg1YWkg12iyVdHDe1QHFRfkJdf0v080KhjQVZr4fDbEPbmn8hceo8W1jmplD2q5q9vaNWhJ7Prxg6JBQZS8z4h032vUJuPR0GeisCC91bw-blbiKRJ_nMTkL1T3D2rcO6zYLpB4WGb5ptvex-VR4I6vFEiI-PWE6I_LlebOgBNrEdbWxoR5QmocDr0KU2b_32arbRlBlTYqsJDHURs43oPuBP3pbcqPTIAnFCC4ZcRaD2pirmaNhl2kGImU1Nf8xzw96a_z"/>
+<img alt="MTN MoMo" class="h-6" data-alt="MTN MoMo payment logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_x1QfisiRTb5ftdnpx_6diW096cYmjsw09llyY16_VsZYg0oe_rPsrgA8pyJdGMb8I5uO5yiAgDEMvLYHL7VJ450WbBYj7shpwU2U7BD_XQ7NCpsvi2HbcgoWzp2alvojvMCuj7NLZHY4oubatBtCoS8soCKevCpvcuVHFWtVpPjomXDsLu3W-cioyQwWxWBHV5KZRjUeQ5eGsDNiD19iHl9C7WKVTpy2NJBw_uGvx5kOkHPEI_o6_SPnyGT1NMVa1sl9CBGc4nRI"/>
+<img alt="Wave" class="h-6" data-alt="Wave Mobile Money logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEv4_yIQT-8czi2l23oFBDRRAXkp_mX1UW2uFCX8yNsS6b1LzYjDWwb2epy_h1aErdRwYQAgmSRqlSkexxboJKEpYbptiuHMOwd8_1dY3dvBPrjlDAJF4-tkWKC8tA89cbv41O0_5aF2WnatCE2P93deu-YAsPS2P1x-Ge-RrPMc-aY9p2D0uxpQ2456rZlDq2bRSzcxVUV5M2MR1edRiUobDrF6NI47bmPCFFIkTfwhdgdIETpClJCYZOFrp-2XIYV83ewEgJjdbD"/>
+</div>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-medium">
+                            * Ce lien est valable pour une seule lecture unique.
+                        </p>
+</div>
+</div>
+<!-- Hero Right: Card -->
+<div class="relative">
+<div class="glass rounded-3xl p-8 flex flex-col gap-8 shadow-2xl relative z-10">
+<div class="aspect-square w-full rounded-2xl overflow-hidden relative group">
+<img alt="Audio Artwork" class="w-full h-full object-cover" data-alt="Abstract vibrant audio cover art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWJ_ATKP7m1GNpZVDdauY8J2KB8ynnoyJDcwRb7N4WpSNXjr7Vtg1QcPdP13OP2L22dWmsNELejJtnr3eR_blyB_qb4l7R-B4_rShkB1YmpGsUoUB0NStvbaJIEM74mUb7ZIAYA_cZGx3pwZUpE2FBJhR9D-TMZaYXsMKjLAlXI2B6XSAk7Pfl2ACYLxJl5qCQE9Z5PiGSMRfagoVln-Uhc-L3TZQECmXFvEE2Zs9LhbJQgAkZLGUZjCka1K6_EzOXL98IKTQv94eg"/>
+<div class="absolute inset-0 bg-background-dark/40 flex items-center justify-center">
+<div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-background-dark shadow-xl">
+<span class="material-symbols-outlined text-4xl font-bold">lock</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-bold text-white">Midnight Resonance</h3>
+<p class="text-primary font-medium tracking-wide uppercase text-sm mt-1">L'ARTISTE MYSTÈRE</p>
+</div>
+<div class="bg-white/5 px-3 py-1.5 rounded-lg flex items-center gap-2 border border-white/10">
+<span class="material-symbols-outlined text-primary text-sm">schedule</span>
+<span class="text-xs font-bold">04:12</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 h-8">
+<div class="w-1 bg-primary/20 h-2 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-4 rounded-full"></div>
+<div class="w-1 bg-primary/60 h-6 rounded-full"></div>
+<div class="w-1 bg-primary/80 h-8 rounded-full"></div>
+<div class="w-1 bg-primary h-5 rounded-full"></div>
+<div class="w-1 bg-primary/80 h-7 rounded-full"></div>
+<div class="w-1 bg-primary/60 h-3 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-5 rounded-full"></div>
+<div class="w-1 bg-primary/20 h-2 rounded-full"></div>
+<div class="flex-grow border-b border-white/10 border-dashed ml-2"></div>
+</div>
+<div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+<span>Audio HD Lossless</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">headphones</span> 2.4k Écoutes</span>
+</div>
+</div>
+</div>
+<!-- Decorative rings behind the card -->
+<div class="absolute -top-10 -right-10 w-40 h-40 border border-primary/20 rounded-full blur-sm"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 border border-primary/10 rounded-full blur-sm"></div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="grid md:grid-cols-3 gap-6 mt-32">
+<div class="glass p-8 rounded-2xl flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h4 class="text-lg font-bold text-white">Accès Instantané</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Paiement validé en quelques secondes via votre Mobile Money préféré.</p>
+</div>
+<div class="glass p-8 rounded-2xl flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">high_quality</span>
+</div>
+<h4 class="text-lg font-bold text-white">Qualité Studio</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Profitez d'un son non-compressé pour une immersion totale dans l'œuvre.</p>
+</div>
+<div class="glass p-8 rounded-2xl flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<h4 class="text-lg font-bold text-white">Exclusivité Totale</h4>
+<p class="text-slate-400 text-sm leading-relaxed">Un morceau rare qui ne sera jamais disponible sur les plateformes classiques.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-white/5 bg-background-dark py-12">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 opacity-50 grayscale">
+<div class="bg-white text-background-dark p-1 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-lg font-bold">graphic_eq</span>
+</div>
+<span class="text-lg font-bold tracking-tight uppercase">Exclusive Audio</span>
+</div>
+<div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="hover:text-primary transition-colors" href="#">Conditions</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<p class="text-xs text-slate-600 font-medium">
+                © 2024 Exclusive Audio. Tous droits réservés.
+            </p>
+</div>
+</footer>
+</body></html>

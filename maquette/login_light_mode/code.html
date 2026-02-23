@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exclusive Audio - Connexion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E11D48", // Intense Red
+                        "background-light": "#F9FAFB",
+                        "surface-light": "#FFFFFF",
+                        "charcoal": "#1F2937",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .glass-light {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .bg-abstract-light {
+            background: radial-gradient(circle at 50% 50%, rgba(225, 29, 72, 0.08) 0%, rgba(249, 250, 251, 1) 70%);
+        }
+        #login-modal {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-charcoal font-display min-h-screen flex flex-col selection:bg-primary/20 scroll-smooth overflow-hidden">
+<nav class="fixed top-0 w-full z-40 border-b border-black/5 bg-background-light/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl font-bold">graphic_eq</span>
+</div>
+<span class="text-xl font-bold tracking-tight uppercase">Exclusive<span class="text-primary">Audio</span></span>
+</div>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#explorer">Explorer</a>
+<a class="hover:text-primary transition-colors" href="#comment-ca-marche">Comment ça marche</a>
+<a class="hover:text-primary transition-colors" href="#aide">Aide</a>
+</div>
+<a class="bg-black/5 hover:bg-black/10 text-charcoal px-6 py-2 rounded-full text-sm font-bold transition-all border border-black/5" href="#">
+            Connexion
+        </a>
+</div>
+</nav>
+<main class="flex-grow pt-20 blur-[6px] brightness-95 pointer-events-none select-none">
+<section class="relative overflow-hidden bg-abstract-light py-12 md:py-24">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Sortie Exclusive
+                    </div>
+<h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-charcoal">
+                        Écoutez ce son <span class="text-primary">exclusif</span> maintenant
+                    </h1>
+<p class="text-xl text-slate-500 font-light leading-relaxed max-w-lg">
+                        Disponible pour une écoute unique après paiement. Vivez une expérience sonore inédite en haute définition.
+                    </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<span class="text-4xl font-bold text-charcoal">100 FCFA</span>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-2 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+                                Paiement Sécurisé
+                            </div>
+</div>
+<button class="group relative flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-white font-bold text-lg px-10 py-5 rounded-xl transition-all active:scale-95 w-full md:w-fit shadow-lg shadow-primary/20">
+<span>Payer et écouter</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="relative">
+<div class="bg-white rounded-3xl p-8 flex flex-col gap-8 shadow-xl relative z-10 border border-slate-100">
+<div class="aspect-square w-full rounded-2xl overflow-hidden relative group">
+<img alt="Audio Artwork" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWJ_ATKP7m1GNpZVDdauY8J2KB8ynnoyJDcwRb7N4WpSNXjr7Vtg1QcPdP13OP2L22dWmsNELejJtnr3eR_blyB_qb4l7R-B4_rShkB1YmpGsUoUB0NStvbaJIEM74mUb7ZIAYA_cZGx3pwZUpE2FBJhR9D-TMZaYXsMKjLAlXI2B6XSAk7Pfl2ACYLxJl5qCQE9Z5PiGSMRfagoVln-Uhc-L3TZQECmXFvEE2Zs9LhbJQgAkZLGUZjCka1K6_EzOXL98IKTQv94eg"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white shadow-xl">
+<span class="material-symbols-outlined text-4xl font-bold">lock</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-bold text-charcoal">Midnight Resonance</h3>
+<p class="text-primary font-medium tracking-wide uppercase text-sm mt-1">L'ARTISTE MYSTÈRE</p>
+</div>
+<div class="bg-slate-50 px-3 py-1.5 rounded-lg flex items-center gap-2 border border-slate-100">
+<span class="material-symbols-outlined text-primary text-sm">schedule</span>
+<span class="text-xs font-bold text-charcoal">04:12</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24" id="explorer">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<h2 class="text-3xl md:text-4xl font-bold text-charcoal mb-4">Explorer les exclusivités</h2>
+<p class="text-slate-500">Découvrez les pépites sonores disponibles pour une écoute éphémère.</p>
+</div>
+</section>
+</main>
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-background-light/40 backdrop-blur-sm" id="login-modal">
+<div class="glass-light max-w-md w-full p-10 rounded-[2.5rem] relative z-10 shadow-2xl overflow-hidden">
+<button class="absolute top-6 right-6 text-slate-400 hover:text-charcoal transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<div class="flex flex-col items-center gap-8">
+<div class="text-center">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 text-primary mb-6">
+<span class="material-symbols-outlined text-3xl">login</span>
+</div>
+<h3 class="text-3xl font-bold text-charcoal mb-3">Connexion</h3>
+<p class="text-slate-500 font-light px-4">Connectez-vous pour écouter vos exclusivités</p>
+</div>
+<div class="w-full flex flex-col gap-4">
+<button class="w-full flex items-center justify-center gap-4 bg-white border border-slate-200 hover:bg-slate-50 text-charcoal font-bold py-4 rounded-2xl transition-all active:scale-[0.98] shadow-sm group">
+<svg class="w-6 h-6" viewBox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-base">Continuer avec Google</span>
+</button>
+<button class="w-full flex items-center justify-center gap-4 bg-charcoal border border-transparent hover:bg-black text-white font-bold py-4 rounded-2xl transition-all active:scale-[0.98] shadow-lg group">
+<svg class="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
+<path d="M17.05 20.28c-.96.95-2.44.8-4.02 0-1.56-.81-2.53-.81-4.07 0-1.61.84-2.82.91-3.83 0-3.32-2.91-3.66-8.11-1.04-10.99 1.29-1.44 2.89-2.28 4.41-2.28 1.52 0 2.27.56 3.48.56 1.18 0 1.96-.56 3.48-.56 1.48 0 2.9.84 4.14 2.28-3.04 1.77-2.53 6.03.5 7.42-.71 1.76-1.76 3.46-3.05 4.57zm-4.32-15.34c.05-.01.1-.02.15-.02.04 0 .09 0 .14.01.07-.48.27-.96.6-1.39.46-.61 1.13-1.08 1.83-1.22-.05.51-.23 1.01-.53 1.45-.48.71-1.26 1.25-2.09 1.39-.19-.08-.36-.16-.5-.22z"></path>
+</svg>
+<span class="text-base">Continuer avec Apple</span>
+</button>
+</div>
+<p class="text-[10px] text-slate-400 text-center uppercase tracking-widest leading-loose mt-2">
+                En vous connectant, vous acceptez nos <br/>
+<a class="text-primary hover:underline" href="#">conditions d'utilisation</a>
+</p>
+</div>
+</div>
+</div>
+<footer class="border-t border-black/5 bg-background-light py-12 blur-[6px] brightness-95">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 opacity-30 grayscale">
+<div class="bg-charcoal text-white p-1 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-lg font-bold">graphic_eq</span>
+</div>
+<span class="text-lg font-bold tracking-tight uppercase">Exclusive Audio</span>
+</div>
+<div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="hover:text-primary transition-colors" href="#">Conditions</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<p class="text-xs text-slate-400 font-medium">
+            © 2024 Exclusive Audio. Tous droits réservés.
+        </p>
+</div>
+</footer>
+
+</body></html>

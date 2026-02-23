@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AudioPlay - Lecture terminée</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#102216",
+                        "neutral-dark": "#1a2e21",
+                        "border-dark": "#28392e",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(16, 34, 22, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(13, 242, 89, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="w-full border-b border-solid border-slate-200 dark:border-border-dark px-6 md:px-10 py-4 flex items-center justify-between bg-background-light dark:bg-background-dark z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">AudioPlay</h2>
+</div>
+<div class="flex items-center gap-6 md:gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Aide</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Mon Compte</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-10 px-4 bg-primary text-background-dark text-sm font-bold transition-transform hover:scale-105 active:scale-95">
+                    Se connecter
+                </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-primary/20" data-alt="User profile placeholder showing a person's face" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwOQ-9TyhM-odJuhNR3hAFpSEGtUR1rH_4Wsaf42l9FhaHe5oJFKnOtx-Kpluotm9fImo9JNxXxShcppkQElkcAoziABxDYS9j4W3nQHZ_pUMcp3ONXrPrRvnuEvcSMZfxO1LN_FBrYsN23ZxDlRD5csDcFJN769DVCkp8Ykc0oMo-8nQ7SLZ8ZZPyMwfc5xAZVhQmW7K8VNc6swCZG1Xl4NBjAKk3THeXg_KyLanaQ5joANxl3fA7GvrIJLHkbumVCEE2Skk3Pxfe");'>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+<!-- Abstract Background Glows -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-[560px] w-full z-10">
+<div class="glass-panel rounded-xl p-8 md:p-12 flex flex-col items-center text-center shadow-2xl">
+<!-- Lock Icon Visual -->
+<div class="relative mb-8">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-2xl"></div>
+<div class="relative size-24 md:size-32 rounded-full bg-neutral-dark border border-primary/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-5xl md:!text-6xl">
+                            lock_person
+                        </span>
+</div>
+<div class="absolute -bottom-2 -right-2 size-10 rounded-full bg-background-dark border border-primary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary !text-xl">
+                            timer_off
+                        </span>
+</div>
+</div>
+<!-- Expired State Content -->
+<div class="space-y-4 mb-10">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white font-display">
+                        Lecture terminée.
+                    </h1>
+<div class="w-12 h-1 bg-primary/40 mx-auto rounded-full"></div>
+<p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-[400px] mx-auto">
+                        Ce lien a expiré et ne peut plus être utilisé. Pour écouter à nouveau, veuillez générer un nouveau lien via votre interface de paiement.
+                    </p>
+</div>
+<!-- Action Button -->
+<div class="w-full flex flex-col gap-4 items-center">
+<button class="flex w-full max-w-[320px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-8 bg-primary text-background-dark text-lg font-bold tracking-tight transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(13,242,89,0.3)] active:scale-95">
+<span class="truncate">Retour à l’accueil</span>
+</button>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined !text-lg">support_agent</span>
+                        Contacter le support client
+                    </a>
+</div>
+<!-- Integration Badge -->
+<div class="mt-12 pt-8 border-t border-primary/10 w-full">
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-4">Sécurisé par Mobile Money</p>
+<div class="flex justify-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="h-6 w-12 bg-slate-400 rounded-sm" data-alt="Abstract logo for a payment provider"></div>
+<div class="h-6 w-12 bg-slate-400 rounded-sm" data-alt="Abstract logo for a payment provider"></div>
+<div class="h-6 w-12 bg-slate-400 rounded-sm" data-alt="Abstract logo for a payment provider"></div>
+</div>
+</div>
+</div>
+<!-- Footer Text -->
+<p class="mt-8 text-center text-xs text-slate-500/60 font-medium uppercase tracking-widest">
+                ID Transaction: #AP-8923-EXP
+            </p>
+</div>
+</main>
+<!-- Simple Bottom Bar -->
+<footer class="w-full py-6 px-10 border-t border-slate-200 dark:border-border-dark flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500">© 2024 AudioPlay. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+</div>
+</footer>
+</body></html>

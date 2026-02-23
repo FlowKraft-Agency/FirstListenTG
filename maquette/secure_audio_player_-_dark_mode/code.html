@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure Audio Player - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#080d0a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glow-pulse {
+            box-shadow: 0 0 0 0 rgba(13, 242, 89, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(13, 242, 89, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(13, 242, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(13, 242, 89, 0); }
+        }
+        .mesh-bg {
+            background-color: #080d0a;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(13, 242, 89, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(13, 242, 89, 0.05) 0px, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen mesh-bg overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-8 py-6 border-b border-white/5 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">shield_lock</span>
+</div>
+<div>
+<h2 class="text-xl font-bold tracking-tight text-slate-100">Secure Stream</h2>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary font-bold">Encrypted Playback</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Library</a>
+<a class="hover:text-primary transition-colors" href="#">Security Details</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-xs text-slate-500">Authenticated via</span>
+<span class="text-sm font-bold text-slate-200">Mobile Money ID</span>
+</div>
+<button class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
+<!-- Status Badge -->
+<div class="mb-8 flex flex-col items-center">
+<div class="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                Lecture unique – non reproductible
+            </div>
+</div>
+<!-- Main Player Stage -->
+<div class="w-full grid lg:grid-cols-2 gap-12 items-center">
+<!-- Cover Art Side -->
+<div class="relative group mx-auto lg:mx-0">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+<div class="relative size-80 sm:size-96 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+<img alt="Album art" class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition duration-700" data-alt="Abstract vibrant wave patterns in green and black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyxf4ue3K2iqgwlLkeCzx_XnRkMQM_SyszZMyvBiS35trzggrYzEHt8N1KOaRzlwl4XF0mxYJshX1nhEjgRpzXGBdc65WUka_yHMQDE2WuXeK-PLj2geSWEtTszT70-iEKrAPO4xcyyP0rDTqJZscm5DrjckT7x2XnpKn9H716FCCBJX0sP2KG3sw1kvNWgU3BTeoTLDvgIPeAMx50eptR6Dd-G1y7G7PTzmWgwVuFvGGTPGDu9Ln1Ox-D-Bj374VMPjfspBebKRXE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<!-- Dynamic Watermark Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+<p class="text-xs rotate-45 select-none whitespace-nowrap uppercase tracking-[1em]">SecureID: 882-004-X91</p>
+</div>
+</div>
+</div>
+<!-- Content Side -->
+<div class="flex flex-col items-center lg:items-start text-center lg:text-left">
+<h1 class="text-5xl sm:text-7xl font-bold text-white tracking-tighter mb-2">Midnight Echo</h1>
+<p class="text-2xl text-primary font-medium mb-8">Ethereal Paradox</p>
+<div class="glass-panel rounded-xl p-6 w-full max-w-md mb-8">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="text-slate-500 text-xs uppercase tracking-wider mb-1">Status</p>
+<p class="text-white font-semibold">Ready for playback</p>
+</div>
+<div class="text-right">
+<p class="text-slate-500 text-xs uppercase tracking-wider mb-1">Time Remaining</p>
+<p class="text-primary font-display text-2xl font-bold">04:22</p>
+</div>
+</div>
+<!-- Linear Progress Bar -->
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3 shadow-[0_0_10px_rgba(13,242,89,0.5)]"></div>
+</div>
+</div>
+<!-- Central Control -->
+<div class="flex items-center gap-8">
+<button class="size-16 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-3xl">replay_10</span>
+</button>
+<button class="size-24 rounded-full bg-primary text-background-dark flex items-center justify-center glow-pulse hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-5xl fill-1">play_arrow</span>
+</button>
+<button class="size-16 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-3xl">forward_10</span>
+</button>
+</div>
+<p class="mt-10 text-slate-500 text-sm italic flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">info</span>
+                    Après cette lecture, le lien expirera automatiquement.
+                </p>
+</div>
+</div>
+<!-- Mobile Money Info Footer -->
+<section class="mt-24 w-full max-w-4xl border-t border-white/5 pt-12">
+<div class="grid md:grid-cols-3 gap-8">
+<div class="flex flex-col items-center text-center p-4">
+<div class="size-12 bg-white/5 rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="text-white font-bold mb-1">Verified Access</h3>
+<p class="text-xs text-slate-500">Unlocked via Orange Money Transaction #TXN-902</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="size-12 bg-white/5 rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">visibility_off</span>
+</div>
+<h3 class="text-white font-bold mb-1">Private Stream</h3>
+<p class="text-xs text-slate-500">Point-to-point encryption active. Recording disabled.</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="size-12 bg-white/5 rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">timer_off</span>
+</div>
+<h3 class="text-white font-bold mb-1">Self-Destructing</h3>
+<p class="text-xs text-slate-500">Content removed from cache immediately after playback.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Floating Help -->
+<div class="fixed bottom-8 right-8">
+<button class="glass-panel p-4 rounded-full flex items-center gap-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium pr-2">Secure Support</span>
+</button>
+</div>
+</body></html>

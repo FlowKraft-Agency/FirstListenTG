@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AudioPlay - Paiements et Facturation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a140d",
+                        "neutral-dark": "#162a1c",
+                        "border-dark": "#28392e",
+                        "card-dark": "rgba(22, 42, 28, 0.6)",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(13, 242, 89, 0.3)',
+                        'neon-hover': '0 0 25px rgba(13, 242, 89, 0.5)',
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            @apply font-sans bg-background-dark text-slate-100;
+        }
+        .glass-panel {
+            background: rgba(22, 42, 28, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(13, 242, 89, 0.1);
+        }
+        .glass-modal {
+            background: rgba(10, 20, 13, 0.8);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(13, 242, 89, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .sidebar-item-active {
+            @apply bg-primary/10 text-primary border-r-2 border-primary;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .btn-neon {
+            @apply bg-primary text-background-dark font-bold py-2 px-6 rounded-lg transition-all shadow-neon hover:shadow-neon-hover;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            @apply bg-background-dark;
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply bg-border-dark rounded-full;
+        }
+        .selection-card {
+            @apply border-2 border-transparent bg-neutral-dark/40 p-4 rounded-xl cursor-pointer transition-all hover:bg-neutral-dark/60;
+        }
+        .selection-card.active {
+            @apply border-primary bg-primary/5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative overflow-hidden">
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+<div class="glass-modal w-full max-w-lg rounded-2xl p-8 relative z-10 animate-in fade-in zoom-in duration-300">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold font-display">Ajouter une méthode de paiement</h2>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="space-y-3">
+<p class="text-sm font-medium text-slate-300">Choisissez un opérateur</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="selection-card active">
+<div class="flex flex-col items-center gap-3">
+<div class="size-14 bg-neutral-dark rounded-lg flex items-center justify-center p-2">
+<img alt="Mixx" class="max-h-full object-contain filter brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGqxjIG3Y5rWoRIOCdJQt954pBp3GOERis2zB5FkDsFKbvC5Um5RkFBRfTpsN4ZZ6u9kETCVhqtKr6le8DVsTKLxb5yilzb-COO5XeZjdhU_UcokOuCdhrTzKI2FT_lYSi2-PXPeVz4ED23BZakXgKxnftM3JGnDB8oKomBkQ7KXAgakdK464oMUyRLZuko1GdH-Sk5xkE8tDyxWoD6pyUsb-AoHqqzYtl9wArreB93qCqXOpuc-_tRRwx_7pGNDdUrmyw_8Vt2gFm"/>
+</div>
+<span class="text-sm font-bold">Mixx by Yas</span>
+</div>
+</div>
+<div class="selection-card">
+<div class="flex flex-col items-center gap-3">
+<div class="size-14 bg-neutral-dark rounded-lg flex items-center justify-center p-2">
+<img alt="Flooz" class="max-h-full object-contain filter brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj_PIibsWhki92Vni_0-5KQp613xFdLWUBboSsn_Xd1KVIxxKFrk95kq2n5TOPD0jqIPYguOgRWt4i69dQ5OfiifXgqpwTJfhiG2L5tg9IGO7TLGXnqaONc4MRQkgft7qlJZk2i9HXaetcESqsJTbkwohRHfx0PEWOID99sVz4SfHAPg2asR53Pc0JH1nA8DU3ZkluOF84ZDrIb3G8iSKWQDI3XJzQW9l4IqL5fGlEWREERgvkt0QimW-XwISsyHrrchmVEjfdozmy"/>
+</div>
+<span class="text-sm font-bold">Flooz</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-medium text-slate-300" for="phone">Numéro de téléphone</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+<span class="text-primary font-bold">+225</span>
+</div>
+<input class="w-full bg-neutral-dark/50 border-border-dark focus:border-primary focus:ring-1 focus:ring-primary rounded-xl py-4 pl-16 text-white placeholder:text-slate-600" id="phone" name="phone" placeholder="00 00 00 00 00" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-3 pt-4">
+<button class="btn-neon w-full py-4 text-base">Confirmer</button>
+<button class="w-full py-3 text-slate-400 hover:text-white font-medium transition-colors">Annuler</button>
+</div>
+</div>
+</div>
+</div>
+<header class="w-full border-b border-solid border-border-dark px-6 md:px-10 py-4 flex items-center justify-between bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight font-display">AudioPlay</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-dark">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">Alexandre D.</p>
+<p class="text-[10px] text-primary uppercase tracking-wider">Premium</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwOQ-9TyhM-odJuhNR3hAFpSEGtUR1rH_4Wsaf42l9FhaHe5oJFKnOtx-Kpluotm9fImo9JNxXxShcppkQElkcAoziABxDYS9j4W3nQHZ_pUMcp3ONXrPrRvnuEvcSMZfxO1LN_FBrYsN23ZxDlRD5csDcFJN769DVCkp8Ykc0oMo-8nQ7SLZ8ZZPyMwfc5xAZVhQmW7K8VNc6swCZG1Xl4NBjAKk3THeXg_KyLanaQ5joANxl3fA7GvrIJLHkbumVCEE2Skk3Pxfe");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 border-r border-border-dark hidden lg:flex flex-col py-8 bg-background-dark/40">
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-medium">Profil</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-medium">Sécurité</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 sidebar-item-active transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Paiements</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Préférences</span>
+</a>
+</nav>
+<div class="mt-auto px-8">
+<button class="flex items-center gap-4 py-3 text-red-400 hover:text-red-300 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Déconnexion</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-dark relative">
+<div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-5xl mx-auto p-6 md:p-10 space-y-8 relative z-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border-dark pb-8">
+<div>
+<h1 class="text-3xl font-bold font-display">Paiements et Facturation</h1>
+<p class="text-slate-400 mt-1">Gérez vos modes de paiement et consultez l'historique de vos achats.</p>
+</div>
+<button class="btn-neon flex items-center gap-2">
+<span class="material-symbols-outlined !text-base">add_card</span>
+                    Ajouter une méthode
+                </button>
+</div>
+<section class="space-y-4">
+<h3 class="text-lg font-bold font-display flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+                    Méthodes de paiement enregistrées
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="glass-panel p-5 rounded-xl border border-primary/20 flex items-center justify-between group hover:border-primary/40 transition-all">
+<div class="flex items-center gap-4">
+<div class="size-12 bg-neutral-dark rounded-lg flex items-center justify-center p-2">
+<img alt="Mixx" class="max-h-full object-contain filter grayscale brightness-200 contrast-100 group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGqxjIG3Y5rWoRIOCdJQt954pBp3GOERis2zB5FkDsFKbvC5Um5RkFBRfTpsN4ZZ6u9kETCVhqtKr6le8DVsTKLxb5yilzb-COO5XeZjdhU_UcokOuCdhrTzKI2FT_lYSi2-PXPeVz4ED23BZakXgKxnftM3JGnDB8oKomBkQ7KXAgakdK464oMUyRLZuko1GdH-Sk5xkE8tDyxWoD6pyUsb-AoHqqzYtl9wArreB93qCqXOpuc-_tRRwx_7pGNDdUrmyw_8Vt2gFm"/>
+</div>
+<div>
+<p class="font-bold">Mixx by Yas</p>
+<p class="text-xs text-slate-400">+225 01 •••• 1234</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase">Par défaut</span>
+<button class="text-slate-500 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined !text-xl">delete</span>
+</button>
+</div>
+</div>
+<div class="glass-panel p-5 rounded-xl flex items-center justify-between group hover:border-primary/40 transition-all">
+<div class="flex items-center gap-4">
+<div class="size-12 bg-neutral-dark rounded-lg flex items-center justify-center p-2">
+<img alt="Flooz" class="max-h-full object-contain filter grayscale brightness-200 group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj_PIibsWhki92Vni_0-5KQp613xFdLWUBboSsn_Xd1KVIxxKFrk95kq2n5TOPD0jqIPYguOgRWt4i69dQ5OfiifXgqpwTJfhiG2L5tg9IGO7TLGXnqaONc4MRQkgft7qlJZk2i9HXaetcESqsJTbkwohRHfx0PEWOID99sVz4SfHAPg2asR53Pc0JH1nA8DU3ZkluOF84ZDrIb3G8iSKWQDI3XJzQW9l4IqL5fGlEWREERgvkt0QimW-XwISsyHrrchmVEjfdozmy"/>
+</div>
+<div>
+<p class="font-bold">Flooz</p>
+<p class="text-xs text-slate-400">+225 05 •••• 5678</p>
+</div>
+</div>
+<button class="text-slate-500 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined !text-xl">delete</span>
+</button>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold font-display flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                        Historique des transactions
+                    </h3>
+<button class="text-primary text-sm font-medium hover:underline flex items-center gap-1">
+                        Tout voir
+                        <span class="material-symbols-outlined !text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="glass-panel rounded-xl overflow-hidden border border-border-dark">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-neutral-dark/50 border-b border-border-dark">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Date</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Titre</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Montant</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Statut</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400 text-right">Facture</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm whitespace-nowrap">24 Mai 2024</td>
+<td class="px-6 py-4 text-sm font-medium">Summer Vibes (Single)</td>
+<td class="px-6 py-4 text-sm font-bold">100 FCFA</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="flex items-center gap-1.5 text-primary text-xs font-bold">
+<span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+                                            Réussi
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center justify-end gap-1 ml-auto group-hover:scale-105">
+<span class="material-symbols-outlined !text-lg">download</span>
+<span class="text-xs font-medium">PDF</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm whitespace-nowrap">22 Mai 2024</td>
+<td class="px-6 py-4 text-sm font-medium">Midnight Jazz</td>
+<td class="px-6 py-4 text-sm font-bold">100 FCFA</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="flex items-center gap-1.5 text-primary text-xs font-bold">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                            Réussi
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center justify-end gap-1 ml-auto group-hover:scale-105">
+<span class="material-symbols-outlined !text-lg">download</span>
+<span class="text-xs font-medium">PDF</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm whitespace-nowrap">15 Mai 2024</td>
+<td class="px-6 py-4 text-sm font-medium">Urban Rhythm Vol. 1</td>
+<td class="px-6 py-4 text-sm font-bold">100 FCFA</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="flex items-center gap-1.5 text-primary text-xs font-bold">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                            Réussi
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center justify-end gap-1 ml-auto group-hover:scale-105">
+<span class="material-symbols-outlined !text-lg">download</span>
+<span class="text-xs font-medium">PDF</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm whitespace-nowrap">02 Mai 2024</td>
+<td class="px-6 py-4 text-sm font-medium">Sunset Melodies</td>
+<td class="px-6 py-4 text-sm font-bold">100 FCFA</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="flex items-center gap-1.5 text-red-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-red-400"></span>
+                                            Échoué
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-700 cursor-not-allowed flex items-center justify-end gap-1 ml-auto" disabled="">
+<span class="material-symbols-outlined !text-lg">block</span>
+<span class="text-xs font-medium">-</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+<div class="glass-panel p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<h4 class="font-bold">Préférences de facturation</h4>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Envoi auto des reçus par email</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-300">Afficher l'ID de transaction sur le relevé</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl space-y-4 border border-primary/10">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">help</span>
+<h4 class="font-bold">Besoin d'aide ?</h4>
+</div>
+<p class="text-sm text-slate-400">Une erreur sur une transaction ou une question sur vos factures ?</p>
+<button class="w-full py-2 bg-neutral-dark hover:bg-neutral-dark/80 rounded-lg text-sm font-bold border border-border-dark transition-all">
+                        Contacter le support
+                    </button>
+</div>
+</section>
+<p class="text-center text-[10px] text-slate-500 uppercase tracking-widest">
+                AudioPlay System v2.4.0 • Dernière transaction: Il y a 2 jours
+            </p>
+</div>
+</main>
+</div>
+<footer class="w-full py-4 px-10 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 bg-background-dark">
+<p class="text-xs text-slate-500">© 2024 AudioPlay. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+</div>
+</footer>
+
+</body></html>

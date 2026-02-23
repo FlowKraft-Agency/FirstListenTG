@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AudioPlay - Préférences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df259",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a140d",
+                        "neutral-dark": "#162a1c",
+                        "border-dark": "#28392e",
+                        "card-dark": "rgba(22, 42, 28, 0.6)",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            @apply font-sans bg-background-dark text-slate-100;
+        }
+        .glass-panel {
+            background: rgba(22, 42, 28, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(13, 242, 89, 0.1);
+        }
+        .sidebar-item-active {
+            @apply bg-primary/10 text-primary border-r-2 border-primary;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toggle-checkbox:checked {
+            @apply right-0 border-primary bg-primary;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            @apply bg-primary/20;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<header class="w-full border-b border-solid border-border-dark px-6 md:px-10 py-4 flex items-center justify-between bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight font-display">AudioPlay</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-dark">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">Alexandre D.</p>
+<p class="text-[10px] text-primary uppercase tracking-wider">Premium</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwOQ-9TyhM-odJuhNR3hAFpSEGtUR1rH_4Wsaf42l9FhaHe5oJFKnOtx-Kpluotm9fImo9JNxXxShcppkQElkcAoziABxDYS9j4W3nQHZ_pUMcp3ONXrPrRvnuEvcSMZfxO1LN_FBrYsN23ZxDlRD5csDcFJN769DVCkp8Ykc0oMo-8nQ7SLZ8ZZPyMwfc5xAZVhQmW7K8VNc6swCZG1Xl4NBjAKk3THeXg_KyLanaQ5joANxl3fA7GvrIJLHkbumVCEE2Skk3Pxfe");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 border-r border-border-dark hidden lg:flex flex-col py-8 bg-background-dark/40">
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-medium">Profil</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-medium">Sécurité</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Paiements</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 sidebar-item-active transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Préférences</span>
+</a>
+</nav>
+<div class="mt-auto px-8">
+<button class="flex items-center gap-4 py-3 text-red-400 hover:text-red-300 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Déconnexion</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-dark relative">
+<div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-4xl mx-auto p-6 md:p-10 space-y-8 relative z-10">
+<div class="pb-6 border-b border-border-dark">
+<h1 class="text-3xl font-bold font-display">Préférences</h1>
+<p class="text-slate-400 mt-2">Personnalisez votre expérience d'écoute et gérez vos réglages système.</p>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<section class="glass-panel rounded-xl p-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div>
+<h3 class="font-bold font-display">Thème de l'application</h3>
+<p class="text-sm text-slate-400">Choisissez l'apparence de l'interface.</p>
+</div>
+</div>
+<div class="flex items-center p-1 bg-background-dark/60 border border-border-dark rounded-full">
+<button class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-400 hover:text-white transition-colors">Clair</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-background-dark shadow-sm">Sombre</button>
+</div>
+</div>
+</section>
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<h3 class="font-bold font-display">Notifications</h3>
+<p class="text-sm text-slate-400">Gérez comment vous souhaitez être alerté.</p>
+</div>
+</div>
+<div class="space-y-4 divide-y divide-border-dark/50">
+<div class="flex items-center justify-between pt-0">
+<div>
+<p class="font-medium">E-mail</p>
+<p class="text-xs text-slate-500">Nouveautés, reçus et alertes de sécurité.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between pt-4">
+<div>
+<p class="font-medium">Navigateur</p>
+<p class="text-xs text-slate-500">Notifications système lors de l'utilisation web.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between pt-4">
+<div>
+<p class="font-medium">Notifications Push</p>
+<p class="text-xs text-slate-500">Alertes instantanées sur vos appareils mobiles.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">graphic_eq</span>
+</div>
+<div>
+<h3 class="font-bold font-display">Qualité Audio</h3>
+<p class="text-sm text-slate-400">Qualité du streaming.</p>
+</div>
+</div>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-3 rounded-lg bg-background-dark/40 border border-border-dark cursor-pointer hover:border-primary/50 transition-all">
+<div class="flex flex-col">
+<span class="text-sm font-bold uppercase tracking-wider">Haute Fidélité</span>
+<span class="text-[10px] text-slate-500">320 kbps - Meilleur son</span>
+</div>
+<input checked="" class="text-primary focus:ring-primary bg-transparent border-slate-600" name="audio-quality" type="radio"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg bg-background-dark/40 border border-border-dark cursor-pointer hover:border-primary/50 transition-all">
+<div class="flex flex-col">
+<span class="text-sm font-bold uppercase tracking-wider">Standard</span>
+<span class="text-[10px] text-slate-500">128 kbps - Économise les données</span>
+</div>
+<input class="text-primary focus:ring-primary bg-transparent border-slate-600" name="audio-quality" type="radio"/>
+</label>
+</div>
+</section>
+<section class="glass-panel rounded-xl p-6 space-y-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">language</span>
+</div>
+<div>
+<h3 class="font-bold font-display">Langue</h3>
+<p class="text-sm text-slate-400">Langue d'affichage.</p>
+</div>
+</div>
+<div class="space-y-4">
+<select class="w-full bg-background-dark/60 border border-border-dark rounded-lg py-3 px-4 focus:ring-primary focus:border-primary text-sm">
+<option selected="" value="fr">Français (France)</option>
+<option value="en">English (UK)</option>
+<option value="en-us">English (US)</option>
+</select>
+<p class="text-[10px] text-slate-500 italic">Certains contenus originaux peuvent ne pas être disponibles dans toutes les langues.</p>
+</div>
+</section>
+</div>
+</div>
+<div class="flex justify-end gap-4 pt-4">
+<button class="px-6 py-2.5 text-sm font-bold text-slate-400 hover:text-white transition-colors">Réinitialiser</button>
+<button class="px-8 py-2.5 bg-primary text-background-dark rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">Enregistrer</button>
+</div>
+<p class="text-center text-[10px] text-slate-500 uppercase tracking-widest pt-10">
+                    AudioPlay System v2.4.0 • Dernière mise à jour: Aujourd'hui
+                </p>
+</div>
+</main>
+</div>
+<footer class="w-full py-4 px-10 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 bg-background-dark">
+<p class="text-xs text-slate-500">© 2024 AudioPlay. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+</div>
+</footer>
+
+</body></html>
