@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function PaymentModal({ onCloseAction, trackTitle, isLoggedIn }: { onCloseAction: () => void, trackTitle?: string | null, isLoggedIn: boolean }) {
+export default function PaymentModal({ onCloseAction, trackTitle, trackId, priceStream = 200, priceDownload = 500, isLoggedIn }: { onCloseAction: () => void, trackTitle?: string | null, trackId?: string | null, priceStream?: number, priceDownload?: number, isLoggedIn: boolean }) {
     const [phone, setPhone] = useState('');
     const [network, setNetwork] = useState('FLOOZ');
     const [accessType, setAccessType] = useState('STREAM');
-    const [amount, setAmount] = useState(200);
+    const [amount, setAmount] = useState(priceStream);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const router = useRouter();
@@ -21,7 +21,7 @@ export default function PaymentModal({ onCloseAction, trackTitle, isLoggedIn }: 
             const res = await fetch('/api/payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone, network, trackTitle, amount, accessType })
+                body: JSON.stringify({ phone, network, trackTitle, trackId, amount, accessType })
             });
 
             const data = await res.json();
@@ -50,12 +50,12 @@ export default function PaymentModal({ onCloseAction, trackTitle, isLoggedIn }: 
                 {/* Options de tarification */}
                 <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: accessType === 'STREAM' ? 'rgba(13, 242, 89, 0.1)' : 'rgba(255,255,255,0.05)', border: accessType === 'STREAM' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s ease' }}>
-                        <input type="radio" name="accessType" value="STREAM" checked={accessType === 'STREAM'} onChange={() => { setAccessType('STREAM'); setAmount(200); }} style={{ accentColor: 'var(--primary-color)', width: '18px', height: '18px' }} />
+                        <input type="radio" name="accessType" value="STREAM" checked={accessType === 'STREAM'} onChange={() => { setAccessType('STREAM'); setAmount(priceStream); }} style={{ accentColor: 'var(--primary-color)', width: '18px', height: '18px' }} />
                         <div style={{ flex: 1, textAlign: 'left' }}>
                             <div style={{ fontWeight: 'bold' }}>Écoute Unique</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Mise à disposition (Streaming)</div>
                         </div>
-                        <div style={{ fontWeight: 'bold', color: 'var(--primary-color)' }}>200 FCFA</div>
+                        <div style={{ fontWeight: 'bold', color: 'var(--primary-color)' }}>{priceStream} FCFA</div>
                     </label>
 
                     <label
@@ -74,7 +74,7 @@ export default function PaymentModal({ onCloseAction, trackTitle, isLoggedIn }: 
                             name="accessType"
                             value="PERMANENT"
                             checked={accessType === 'PERMANENT'}
-                            onChange={() => { if (isLoggedIn) { setAccessType('PERMANENT'); setAmount(500); } }}
+                            onChange={() => { if (isLoggedIn) { setAccessType('PERMANENT'); setAmount(priceDownload); } }}
                             disabled={!isLoggedIn}
                             style={{ accentColor: 'var(--primary-color)', width: '18px', height: '18px' }}
                         />
@@ -84,7 +84,7 @@ export default function PaymentModal({ onCloseAction, trackTitle, isLoggedIn }: 
                             </div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Sauvegarde illimitée dans Ma Musique</div>
                         </div>
-                        <div style={{ fontWeight: 'bold', color: 'var(--primary-color)' }}>500 FCFA</div>
+                        <div style={{ fontWeight: 'bold', color: 'var(--primary-color)' }}>{priceDownload} FCFA</div>
                     </label>
                 </div>
 

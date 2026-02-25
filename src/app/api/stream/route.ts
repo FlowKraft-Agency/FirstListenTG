@@ -2,33 +2,51 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const tokenValue = searchParams.get('token');
+  const adminPreviewId = searchParams.get('admin_preview');
 
-  if (!tokenValue) {
-    return new NextResponse('Token manquant', { status: 401 });
-  }
+  let targetFileName = 'test-audio.mp3';
 
-  // Vérification de la validité du Token 
-  const token = await prisma.token.findUnique({
-    where: { id: tokenValue }
-  });
-
-  if (!token) {
-    return new NextResponse('Token invalide', { status: 403 });
-  }
-
-  // Vérification de l'expiration temporelle (30 min) UNIQUEMENT pour les streams
-  // @ts-ignore : accessType will be available after prisma generate
-  if (token.accessType === 'STREAM' && new Date() > token.expiresAt) {
-    if (token.status !== 'CONSUMED') {
-      await prisma.token.update({
-         where: { id: token.id },
-         data: { status: 'CONSUMED' }
-      });
+  if (adminPreviewId) {
+    const session = await getServerSession(authOptions);
+    if (!session || (session.user as any).role !== "ADMIN") {
+      return new NextResponse('Non autorisé', { status: 403 });
     }
-    return new NextResponse('Token expiré', { status: 403 });
+    const track = await prisma.track.findUnique({ where: { id: adminPreviewId } });
+    if (!track) return new NextResponse('Piste introuvable', { status: 404 });
+    targetFileName = track.audioFileName;
+  } else if (tokenValue) {
+    // Vérification de la validité du Token 
+    const token = await prisma.token.findUnique({
+      where: { id: tokenValue },
+      include: { transaction: { include: { track: true } } }
+    });
+
+    if (!token) {
+      return new NextResponse('Token invalide', { status: 403 });
+    }
+
+    // Vérification de l'expiration temporelle (30 min) UNIQUEMENT pour les streams
+    if (token.accessType === 'STREAM' && new Date() > token.expiresAt) {
+      if (token.status !== 'CONSUMED') {
+        await prisma.token.update({
+          where: { id: token.id },
+          data: { status: 'CONSUMED' }
+        });
+      }
+      return new NextResponse('Token expiré', { status: 403 });
+    }
+
+    if (token.transaction?.track?.audioFileName) {
+      targetFileName = token.transaction.track.audioFileName;
+    }
+  } else {
+    return new NextResponse('Requête invalide', { status: 400 });
   }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -40,8 +58,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Fichier audio sécurisé sur Supabase Storage (Bucket "audio-tracks")
-  // En production, le nom du fichier devrait être dans la base de données (ex: token.track.fileName)
-  const fileName = 'test-audio.mp3';
+  const fileName = targetFileName;
   const storageUrl = `${supabaseUrl}/storage/v1/object/authenticated/audio-tracks/${fileName}`;
 
   // Récupérer le header Range de la requête originale pour le stream natif

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogOut, Music, Settings, User as UserIcon, Shield, CreditCard, Sliders, Home } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { LogOut, Music, Settings, User as UserIcon, Shield, CreditCard, Sliders, Home, Star, LayoutDashboard } from "lucide-react";
 
 export default function DashboardSidebar() {
     const pathname = usePathname();
+    const { data: session } = useSession();
 
     return (
         <aside className="dashboard-sidebar">
@@ -28,6 +30,20 @@ export default function DashboardSidebar() {
                     <UserIcon />
                     <span>Profil</span>
                 </Link>
+
+                {(session?.user as any)?.role === 'ARTIST' && (
+                    <Link href="/artist" className="nav-link" style={{ color: 'var(--primary-color)' }}>
+                        <Star />
+                        <span>Studio Artiste</span>
+                    </Link>
+                )}
+
+                {(session?.user as any)?.role === 'ADMIN' && (
+                    <Link href="/admin" className="nav-link" style={{ color: '#ef4444' }}>
+                        <LayoutDashboard />
+                        <span>Administration</span>
+                    </Link>
+                )}
 
                 {/* Paramètres avec sous-menus (Cachés sur mobile, ou accessibles autrement dans une V ultérieure, mis dans le flow normal pour l'instant) */}
                 <div className="desktop-only" style={{ flexDirection: 'column' }}>

@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {
-    const { phone, network, amount = 200, accessType = 'STREAM' } = await request.json();
+    const { phone, network, amount = 200, accessType = 'STREAM', trackId } = await request.json();
 
     if (!phone || !network) {
       return NextResponse.json({ error: 'Numéro de téléphone et réseau requis' }, { status: 400 });
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
         amount: amount,
         status: 'SUCCESS', // Payé avec succès (Bouchon)
         userId: userId,
+        trackId: trackId || null,
       } as any
     });
 

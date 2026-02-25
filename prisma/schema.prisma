@@ -9,14 +9,36 @@ datasource db {
 }
 
 model Transaction {
-  id        String   @id @default(uuid())
-  amount    Int
-  status    String   @default("PENDING") // PENDING, SUCCESS, FAILED
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  token     Token?
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  id           String   @id @default(uuid())
+  amount       Int
+  status       String   @default("PENDING") // PENDING, SUCCESS, FAILED
+  payoutStatus String   @default("NONE")    // NONE, PENDING, PAID (pour les gains artistes)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  token        Token?
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  trackId      String?
+  track        Track?   @relation(fields: [trackId], references: [id], onDelete: SetNull)
+}
+
+model Track {
+  id            String   @id @default(uuid())
+  title         String
+  artistName    String?  // Optionnel, pour un nom de scène
+  coverImage    String?  // URL de l'image de couverture
+  audioFileName String   // Nom du fichier dans Supabase Storage
+  priceStream   Int      @default(200)
+  priceDownload Int      @default(500)
+  status        String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  
+  artistId      String
+  artist        User     @relation("UserTracks", fields: [artistId], references: [id], onDelete: Cascade)
+  
+  transactions  Transaction[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Token {
@@ -67,9 +89,10 @@ model User {
   emailVerified DateTime?
   image         String?
   phone         String?   // Téléphone du compte Mobile Money principal
-  role          String    @default("USER") // USER, PREMIUM
+  role          String    @default("USER") // USER, ARTIST, ADMIN, PREMIUM
   transactions  Transaction[]
   tokens        Token[]
+  tracks        Track[]   @relation("UserTracks")
   accounts      Account[]
   sessions      Session[]
 }
