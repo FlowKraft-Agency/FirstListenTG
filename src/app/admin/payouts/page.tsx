@@ -15,7 +15,6 @@ export default async function AdminPayoutsPage() {
         orderBy: { createdAt: "desc" }
     });
 
-    // Group by Artist
     const artistPayouts: Record<string, { artist: any, totalAmount: number, transactionIds: string[] }> = {};
 
     pendingTransactions.forEach(tx => {
@@ -24,7 +23,6 @@ export default async function AdminPayoutsPage() {
         if (!artistPayouts[artist.id]) {
             artistPayouts[artist.id] = { artist, totalAmount: 0, transactionIds: [] };
         }
-        // Calculate the cut (e.g., 80% to artist)
         const cut = Math.floor(tx.amount * 0.8);
         artistPayouts[artist.id].totalAmount += cut;
         artistPayouts[artist.id].transactionIds.push(tx.id);
@@ -33,37 +31,35 @@ export default async function AdminPayoutsPage() {
     const payoutsList = Object.values(artistPayouts);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xl)' }}>
             <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Paiements Artistes</h1>
-                <p style={{ color: 'var(--text-muted)', margin: 0 }}>Gérez les reversements des ventes vers les numéros Mobile Money des artistes (80% des revenus).</p>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 800, margin: 0 }}>Paiements Artistes</h1>
+                <p style={{ color: 'var(--text-muted)', margin: 0, marginTop: 'var(--space-xs)' }}>Gérez les reversements des ventes vers les numéros Mobile Money des artistes (80% des revenus).</p>
             </div>
 
-            <div className="glass-panel" style={{ borderRadius: '1rem', overflow: 'hidden' }}>
+            <div className="data-table-wrapper">
                 {payoutsList.length === 0 ? (
-                    <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                        <CheckCircle size={48} style={{ margin: '0 auto 1rem', opacity: 0.5, color: 'var(--primary-color)' }} />
-                        <h3 style={{ fontSize: '1.25rem', color: 'var(--text-main)', margin: '0 0 0.5rem 0' }}>Tout est payé !</h3>
-                        <p style={{ margin: 0 }}>Aucun reversement en attente.</p>
+                    <div className="empty-state" style={{ padding: 'var(--space-3xl)' }}>
+                        <CheckCircle size={48} className="empty-state__icon" style={{ color: 'var(--primary-color)', opacity: 0.5 }} />
+                        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', color: 'var(--text-main)', marginBottom: 'var(--space-sm)' }}>Tout est payé !</h3>
+                        <p className="empty-state__text">Aucun reversement en attente.</p>
                     </div>
                 ) : (
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
-                            <thead>
-                                <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                                    <th style={{ padding: '1rem' }}>Artiste</th>
-                                    <th style={{ padding: '1rem' }}>Téléphone (MoMo)</th>
-                                    <th style={{ padding: '1rem' }}>Montant Dû</th>
-                                    <th style={{ padding: '1rem', textAlign: 'center' }}>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {payoutsList.map(payout => (
-                                    <PayoutRow key={payout.artist.id} payout={payout} />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table className="data-table">
+                        <thead>
+                            <tr>
+                                <th>Artiste</th>
+                                <th>Téléphone (MoMo)</th>
+                                <th>Montant Dû</th>
+                                <th style={{ textAlign: 'center' }}>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {payoutsList.map(payout => (
+                                <PayoutRow key={payout.artist.id} payout={payout} />
+                            ))}
+                        </tbody>
+                    </table>
                 )}
             </div>
         </div>

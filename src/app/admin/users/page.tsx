@@ -7,31 +7,29 @@ export default async function AdminUsersPage() {
     });
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xl)' }}>
             <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Gestion des Utilisateurs</h1>
-                <p style={{ color: 'var(--text-muted)', margin: 0 }}>Attribuez des rôles aux utilisateurs de la plateforme (Ex: Promouvoir un artiste).</p>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 800, margin: 0 }}>Gestion des Utilisateurs</h1>
+                <p style={{ color: 'var(--text-muted)', margin: 0, marginTop: 'var(--space-xs)' }}>Attribuez des rôles aux utilisateurs de la plateforme.</p>
             </div>
 
-            <div className="glass-panel" style={{ borderRadius: '1rem', overflow: 'hidden' }}>
-                <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
-                        <thead>
-                            <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                                <th style={{ padding: '1rem' }}>Avatar</th>
-                                <th style={{ padding: '1rem' }}>Nom</th>
-                                <th style={{ padding: '1rem' }}>Email</th>
-                                <th style={{ padding: '1rem' }}>Rôle</th>
-                                <th style={{ padding: '1rem', textAlign: 'center' }}>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map(user => (
-                                <UserRow key={user.id} user={user} />
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+            <div className="data-table-wrapper">
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôle</th>
+                            <th style={{ textAlign: 'center' }}>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(user => (
+                            <UserRow key={user.id} user={user} />
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

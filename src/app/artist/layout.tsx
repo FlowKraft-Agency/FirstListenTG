@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, UploadCloud, LogOut } from "lucide-react";
+import { LayoutDashboard, UploadCloud, LogOut, BarChart3, Wallet } from "lucide-react";
 
 export default async function ArtistLayout({ children }: { children: React.ReactNode }) {
     const session = await getServerSession(authOptions);
@@ -11,39 +11,36 @@ export default async function ArtistLayout({ children }: { children: React.React
         redirect("/");
     }
 
-    const linkStyle = { display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', borderRadius: '0.5rem', color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s', fontWeight: 500 };
-
     return (
-        <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-main)' }}>
-            {/* Sidebar Artist */}
-            <aside style={{ width: '250px', background: 'var(--surface-color)', borderRight: '1px solid var(--glass-icon-bg)', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid var(--glass-icon-bg)' }}>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.025em' }}>
+        <div className="studio-layout">
+            <aside className="studio-sidebar">
+                <div className="studio-sidebar__logo">
+                    <span className="studio-sidebar__logo-text">
                         First<span style={{ color: 'var(--primary-color)' }}>Artist</span>
                     </span>
                 </div>
 
-                <nav style={{ flex: 1, padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <Link href="/artist" style={linkStyle}>
+                <nav className="studio-sidebar__nav">
+                    <Link href="/artist" className="studio-sidebar__link">
                         <LayoutDashboard size={20} /> Mes Revenus
                     </Link>
-                    <Link href="/artist/upload" style={linkStyle}>
+                    <Link href="/artist/upload" className="studio-sidebar__link">
                         <UploadCloud size={20} /> Publier un Son
+                    </Link>
+                    <Link href="/artist/payouts" className="studio-sidebar__link">
+                        <Wallet size={20} /> Paiements
                     </Link>
                 </nav>
 
-                <div style={{ padding: '1.5rem 1rem', borderTop: '1px solid var(--glass-icon-bg)' }}>
-                    <Link href="/" style={{ ...linkStyle, color: '#ef4444' }}>
+                <div style={{ padding: 'var(--space-lg) var(--space-xl)', borderTop: '1px solid var(--border-color)', marginTop: 'auto' }}>
+                    <Link href="/" className="studio-sidebar__link" style={{ color: 'var(--error-color)', padding: '0.5rem 0' }}>
                         <LogOut size={20} /> Quitter Studio
                     </Link>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main style={{ flex: 1, padding: '2rem', overflowY: 'auto' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    {children}
-                </div>
+            <main className="studio-main">
+                {children}
             </main>
         </div>
     );

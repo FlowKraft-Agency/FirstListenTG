@@ -10,39 +10,37 @@ export default async function AdminTracksPage() {
     });
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2xl)' }}>
             <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Modération des Sons</h1>
-                <p style={{ color: 'var(--text-muted)', margin: 0 }}>Vérifiez et validez les nouveaux morceaux envoyés par les artistes.</p>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 800, margin: 0 }}>Modération des Sons</h1>
+                <p style={{ color: 'var(--text-muted)', margin: 0, marginTop: 'var(--space-xs)' }}>Vérifiez et validez les nouveaux morceaux envoyés par les artistes.</p>
             </div>
 
-            <div className="glass-panel" style={{ borderRadius: '1rem', overflow: 'hidden' }}>
+            <div className="data-table-wrapper">
                 {pendingTracks.length === 0 ? (
-                    <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                        <CheckCircle size={48} style={{ margin: '0 auto 1rem', opacity: 0.5, color: 'var(--primary-color)' }} />
-                        <h3 style={{ fontSize: '1.25rem', color: 'var(--text-main)', margin: '0 0 0.5rem 0' }}>Tout est à jour !</h3>
-                        <p style={{ margin: 0 }}>Aucun nouveau morceau en attente de modération.</p>
+                    <div className="empty-state" style={{ padding: 'var(--space-3xl)' }}>
+                        <CheckCircle size={48} className="empty-state__icon" style={{ color: 'var(--primary-color)', opacity: 0.5 }} />
+                        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', color: 'var(--text-main)', marginBottom: 'var(--space-sm)' }}>Tout est à jour !</h3>
+                        <p className="empty-state__text">Aucun nouveau morceau en attente de modération.</p>
                     </div>
                 ) : (
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
-                            <thead>
-                                <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                                    <th style={{ padding: '1rem' }}>Cover</th>
-                                    <th style={{ padding: '1rem' }}>Morceau</th>
-                                    <th style={{ padding: '1rem' }}>Artiste</th>
-                                    <th style={{ padding: '1rem' }}>Prix (Stream / DL)</th>
-                                    <th style={{ padding: '1rem' }}>Aperçu Audio</th>
-                                    <th style={{ padding: '1rem', textAlign: 'center' }}>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {pendingTracks.map(track => (
-                                    <TrackRow key={track.id} track={track} />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table className="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cover</th>
+                                <th>Morceau</th>
+                                <th>Artiste</th>
+                                <th>Prix (Stream / DL)</th>
+                                <th>Aperçu Audio</th>
+                                <th style={{ textAlign: 'center' }}>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pendingTracks.map(track => (
+                                <TrackRow key={track.id} track={track} />
+                            ))}
+                        </tbody>
+                    </table>
                 )}
             </div>
         </div>

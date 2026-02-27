@@ -11,45 +11,39 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         redirect("/");
     }
 
-    const linkStyle = { display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', borderRadius: '0.5rem', color: 'var(--text-muted)', textDecoration: 'none', transition: 'all 0.2s', fontWeight: 500 };
-
     return (
-        <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-main)' }}>
-            {/* Sidebar Admin */}
-            <aside style={{ width: '250px', background: 'var(--surface-color)', borderRight: '1px solid var(--glass-icon-bg)', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid var(--glass-icon-bg)' }}>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.025em' }}>
-                        First<span style={{ color: 'var(--primary-color)' }}>Admin</span>
+        <div className="studio-layout">
+            <aside className="studio-sidebar">
+                <div className="studio-sidebar__logo">
+                    <span className="studio-sidebar__logo-text">
+                        First<span style={{ color: '#ef4444' }}>Admin</span>
                     </span>
                 </div>
 
-                <nav style={{ flex: 1, padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <Link href="/admin" style={linkStyle}>
+                <nav className="studio-sidebar__nav">
+                    <Link href="/admin" className="studio-sidebar__link">
                         <LayoutDashboard size={20} /> Dashboard
                     </Link>
-                    <Link href="/admin/tracks" style={linkStyle}>
+                    <Link href="/admin/tracks" className="studio-sidebar__link">
                         <Music size={20} /> Modération Sons
                     </Link>
-                    <Link href="/admin/payouts" style={linkStyle}>
+                    <Link href="/admin/payouts" className="studio-sidebar__link">
                         <DollarSign size={20} /> Payouts Artistes
                     </Link>
-                    <Link href="/admin/users" style={linkStyle}>
+                    <Link href="/admin/users" className="studio-sidebar__link">
                         <Users size={20} /> Utilisateurs
                     </Link>
                 </nav>
 
-                <div style={{ padding: '1.5rem 1rem', borderTop: '1px solid var(--glass-icon-bg)' }}>
-                    <Link href="/" style={{ ...linkStyle, color: '#ef4444' }}>
+                <div style={{ padding: 'var(--space-lg) var(--space-xl)', borderTop: '1px solid var(--border-color)', marginTop: 'auto' }}>
+                    <Link href="/" className="studio-sidebar__link" style={{ color: 'var(--error-color)', padding: '0.5rem 0' }}>
                         <LogOut size={20} /> Quitter Admin
                     </Link>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main style={{ flex: 1, padding: '2rem', overflowY: 'auto' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    {children}
-                </div>
+            <main className="studio-main">
+                {children}
             </main>
         </div>
     );
