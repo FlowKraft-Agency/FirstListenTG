@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import ArtistProfileClient from "./ArtistProfileClient";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ArtistPublicPage({ params }: { params: Promise<{ artistName: string }> }) {
     const { artistName } = await params;
     const decodedName = decodeURIComponent(artistName);

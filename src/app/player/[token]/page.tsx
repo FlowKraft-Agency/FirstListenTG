@@ -4,6 +4,8 @@ import { XCircle, CheckCircle, ArrowLeft, Info, Music } from 'lucide-react';
 import Link from 'next/link';
 import ShareButton from './ShareButton';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PlayerPage({ params }: { params: Promise<{ token: string }> }) {
     const { token } = await params;
 
