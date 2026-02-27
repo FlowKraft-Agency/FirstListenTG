@@ -1,7 +1,12 @@
 "use client";
-import { uploadTrack } from "./actions";
+import { getSignedUploadUrl, saveTrackRecord } from "./actions";
 import { useState } from "react";
 import { UploadCloud, CheckCircle } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function UploadPage() {
     const [loading, setLoading] = useState(false);
@@ -12,17 +17,62 @@ export default function UploadPage() {
         e.preventDefault();
         setLoading(true);
         setError("");
+
         const formData = new FormData(e.currentTarget);
+        const title = formData.get("title") as string;
+        const artistName = formData.get("artistName") as string;
+        const coverImage = formData.get("coverImage") as string;
+        const audioFile = formData.get("audioFile") as File;
+        const priceStream = parseInt(formData.get("priceStream") as string);
+        const priceDownload = parseInt(formData.get("priceDownload") as string);
+
+        if (!title || !audioFile || audioFile.size === 0) {
+            setError("Titre et fichier audio requis");
+            setLoading(false);
+            return;
+        }
 
         try {
-            const result = await uploadTrack(formData);
-            if (result.error) {
-                setError(result.error);
+            // 1. Get signed URL for direct upload
+            const fileExt = audioFile.name.split('.').pop() || 'mp3';
+            const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+            const urlResult = await getSignedUploadUrl(fileName, audioFile.type);
+
+            if (urlResult.error || !urlResult.path || !urlResult.token) {
+                setError(urlResult.error || "Erreur lors de la préparation de l'upload");
+                setLoading(false);
+                return;
+            }
+
+            // 2. Upload directly to Supabase Storage from the browser
+            const { error: uploadError } = await supabase.storage
+                .from("audio-tracks")
+                .uploadToSignedUrl(urlResult.path, urlResult.token, audioFile);
+
+            if (uploadError) {
+                console.error("Supabase Direct Upload Error:", uploadError);
+                throw new Error("Erreur lors de l'envoi du fichier vers le serveur de stockage.");
+            }
+
+            // 3. Save the track record in PostgreSQL
+            const saveResult = await saveTrackRecord({
+                title,
+                artistName,
+                coverImage,
+                audioFileName: fileName,
+                priceStream,
+                priceDownload
+            });
+
+            if (saveResult.error) {
+                setError(saveResult.error);
             } else {
                 setSuccess(true);
             }
         } catch (err: any) {
-            setError("Erreur lors de l'upload.");
+            console.error("Upload process error:", err);
+            setError(err.message || "Erreur lors de l'upload.");
         }
         setLoading(false);
     };
