@@ -20,7 +20,7 @@ export default function UserRow({ user }: { user: any }) {
     };
 
     return (
-        <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', opacity: loading ? 0.5 : 1 }}>
+        <tr style={{ borderBottom: '1px solid var(--glass-icon-bg)', opacity: loading ? 0.5 : 1 }}>
             <td style={{ padding: '1rem' }}>
                 {user.image ? <img src={user.image} style={{ width: '40px', height: '40px', borderRadius: '50%' }} alt="Avatar" /> : <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--surface-color)' }} />}
             </td>
@@ -31,7 +31,7 @@ export default function UserRow({ user }: { user: any }) {
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     disabled={loading}
-                    style={{ padding: '0.5rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' }}
+                    style={{ padding: '0.5rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none' }}
                 >
                     <option value="USER">Utilisateur (USER)</option>
                     <option value="PREMIUM">Premium (PREMIUM)</option>

@@ -29,7 +29,7 @@ export default async function AdminDashboardPage() {
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ color: 'var(--text-muted)' }}>Chiffre d'Affaire (Total)</span>
-                        <div style={{ padding: '0.5rem', background: 'rgba(13, 242, 89, 0.1)', borderRadius: '0.5rem', color: 'var(--primary-color)' }}>
+                        <div style={{ padding: '0.5rem', background: 'var(--primary-alpha-10)', borderRadius: '0.5rem', color: 'var(--primary-color)' }}>
                             <DollarSign size={20} />
                         </div>
                     </div>

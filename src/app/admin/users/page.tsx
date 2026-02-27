@@ -17,7 +17,7 @@ export default async function AdminUsersPage() {
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
                         <thead>
-                            <tr style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                            <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
                                 <th style={{ padding: '1rem' }}>Avatar</th>
                                 <th style={{ padding: '1rem' }}>Nom</th>
                                 <th style={{ padding: '1rem' }}>Email</th>

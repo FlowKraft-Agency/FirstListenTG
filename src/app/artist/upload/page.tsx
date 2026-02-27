@@ -30,10 +30,10 @@ export default function UploadPage() {
     if (success) {
         return (
             <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <CheckCircle size={64} style={{ margin: '0 auto 1rem', color: '#0df259' }} />
-                <h1 style={{ fontSize: '2rem', color: '#fff' }}>Upload réussi !</h1>
+                <CheckCircle size={64} style={{ margin: '0 auto 1rem', color: 'var(--primary-color)' }} />
+                <h1 style={{ fontSize: '2rem', color: 'var(--text-main)' }}>Upload réussi !</h1>
                 <p>Votre morceau a été envoyé. Il sera disponible publiquement une fois validé par un modérateur.</p>
-                <button onClick={() => setSuccess(false)} className="btn btn-secondary" style={{ marginTop: '2rem', padding: '0.75rem 1.5rem', background: 'rgba(255,255,255,0.05)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', cursor: 'pointer' }}>Uploader un autre morceau</button>
+                <button onClick={() => setSuccess(false)} className="btn btn-secondary" style={{ marginTop: '2rem', padding: '0.75rem 1.5rem', background: 'var(--glass-icon-bg)', color: 'var(--text-main)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', cursor: 'pointer' }}>Uploader un autre morceau</button>
             </div>
         );
     }
@@ -50,38 +50,41 @@ export default function UploadPage() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontWeight: 600 }}>Titre du morceau *</label>
-                    <input name="title" required type="text" placeholder="Ex: Midnight Resonance" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                    <input name="title" required type="text" placeholder="Ex: Midnight Resonance" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontWeight: 600 }}>Nom d'artiste (Optionnel)</label>
-                    <input name="artistName" type="text" placeholder="Laissez vide pour utiliser votre nom de profil" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                    <input name="artistName" type="text" placeholder="Laissez vide pour utiliser votre nom de profil" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontWeight: 600 }}>Image de couverture (Optionnel, URL)</label>
-                    <input name="coverImage" type="url" placeholder="https://..." style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                    <input name="coverImage" type="url" placeholder="https://..." style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontWeight: 600 }}>Fichier Audio (.mp3, .wav) *</label>
-                    <input name="audioFile" required type="file" accept="audio/*" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                    <input name="audioFile" required type="file" accept="audio/*" style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <label style={{ fontWeight: 600 }}>Prix Écoute (FCFA)</label>
-                        <input name="priceStream" type="number" defaultValue={200} required style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                        <input name="priceStream" type="number" defaultValue={200} required style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <label style={{ fontWeight: 600 }}>Prix Téléchargement (FCFA)</label>
-                        <input name="priceDownload" type="number" defaultValue={500} required style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                        <input name="priceDownload" type="number" defaultValue={500} required style={{ padding: '0.75rem', borderRadius: '0.5rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)' }} />
                     </div>
                 </div>
 
                 <button type="submit" disabled={loading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '1rem', background: 'var(--primary-color)', color: '#000', fontWeight: 700, borderRadius: '0.5rem', border: 'none', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, marginTop: '1rem' }}>
-                    {loading ? "Envoi en cours..." : <><UploadCloud size={20} /> Publier le morceau</>}
+                    {loading ? (
+                        <div style={{ width: '20px', height: '20px', border: '3px solid rgba(0,0,0,0.1)', borderTopColor: '#000', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                    ) : <><UploadCloud size={20} /> Publier le morceau</>}
                 </button>
+                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </form>
         </div>
     );

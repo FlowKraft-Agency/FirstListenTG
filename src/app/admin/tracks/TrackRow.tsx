@@ -19,7 +19,7 @@ export default function TrackRow({ track }: { track: any }) {
     };
 
     return (
-        <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', opacity: loading ? 0.5 : 1 }}>
+        <tr style={{ borderBottom: '1px solid var(--glass-icon-bg)', opacity: loading ? 0.5 : 1 }}>
             <td style={{ padding: '1rem' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '0.5rem', background: 'var(--surface-color)', overflow: 'hidden' }}>
                     {track.coverImage ? <img src={track.coverImage} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : null}
@@ -33,7 +33,7 @@ export default function TrackRow({ track }: { track: any }) {
             </td>
             <td style={{ padding: '1rem', textAlign: 'center' }}>
                 <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                    <button onClick={handleApprove} disabled={loading} style={{ background: 'rgba(13, 242, 89, 0.1)', color: 'var(--primary-color)', border: 'none', padding: '0.5rem', borderRadius: '0.5rem', cursor: 'pointer' }} title="Valider">
+                    <button onClick={handleApprove} disabled={loading} style={{ background: 'var(--primary-alpha-10)', color: 'var(--primary-color)', border: 'none', padding: '0.5rem', borderRadius: '0.5rem', cursor: 'pointer' }} title="Valider">
                         <Check size={18} />
                     </button>
                     <button onClick={handleReject} disabled={loading} style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: 'none', padding: '0.5rem', borderRadius: '0.5rem', cursor: 'pointer' }} title="Rejeter">

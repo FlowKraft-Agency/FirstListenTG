@@ -29,14 +29,18 @@ export default async function ProfilePage() {
             <main className="dashboard-main">
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', paddingBottom: '2rem', borderBottom: '1px solid var(--border-color)', marginBottom: '2rem', flexWrap: 'wrap' }}>
-                    <div style={{ width: '100px', height: '100px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--primary-color), #121a14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <UserIcon size={48} color="#000" />
+                    <div style={{ width: '100px', height: '100px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--primary-color), #121a14)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                        {user?.image ? (
+                            <img src={user.image} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                            <UserIcon size={48} color="#000" />
+                        )}
                     </div>
                     <div>
                         <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>{user?.name || 'Utilisateur Anonyme'}</h1>
                         <p style={{ color: 'var(--text-muted)' }}>{user?.email}</p>
                         <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-                            <span style={{ fontSize: '10px', background: 'rgba(13, 242, 89, 0.2)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>{user?.role === 'PREMIUM' ? 'PREMIUM' : 'MEMBRE STANDARD'}</span>
+                            <span style={{ fontSize: '10px', background: 'var(--primary-alpha-20)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>{user?.role === 'PREMIUM' ? 'PREMIUM' : 'MEMBRE STANDARD'}</span>
                         </div>
                     </div>
                 </div>

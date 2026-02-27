@@ -13,7 +13,7 @@ export default function PayoutRow({ payout }: { payout: any }) {
     };
 
     return (
-        <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', opacity: loading ? 0.5 : 1 }}>
+        <tr style={{ borderBottom: '1px solid var(--glass-icon-bg)', opacity: loading ? 0.5 : 1 }}>
             <td style={{ padding: '1rem', fontWeight: 600 }}>{payout.artist.name}</td>
             <td style={{ padding: '1rem', color: 'var(--text-muted)' }}>{payout.artist.phone || 'Non renseigné'}</td>
             <td style={{ padding: '1rem', color: 'var(--primary-color)', fontWeight: 800 }}>{payout.totalAmount} FCFA</td>

@@ -20,14 +20,14 @@ export default async function AdminTracksPage() {
                 {pendingTracks.length === 0 ? (
                     <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                         <CheckCircle size={48} style={{ margin: '0 auto 1rem', opacity: 0.5, color: 'var(--primary-color)' }} />
-                        <h3 style={{ fontSize: '1.25rem', color: '#fff', margin: '0 0 0.5rem 0' }}>Tout est à jour !</h3>
+                        <h3 style={{ fontSize: '1.25rem', color: 'var(--text-main)', margin: '0 0 0.5rem 0' }}>Tout est à jour !</h3>
                         <p style={{ margin: 0 }}>Aucun nouveau morceau en attente de modération.</p>
                     </div>
                 ) : (
                     <div style={{ overflowX: 'auto' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
                             <thead>
-                                <tr style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                                <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
                                     <th style={{ padding: '1rem' }}>Cover</th>
                                     <th style={{ padding: '1rem' }}>Morceau</th>
                                     <th style={{ padding: '1rem' }}>Artiste</th>

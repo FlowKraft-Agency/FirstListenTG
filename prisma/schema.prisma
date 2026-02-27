@@ -28,9 +28,13 @@ model Track {
   artistName    String?  // Optionnel, pour un nom de scène
   coverImage    String?  // URL de l'image de couverture
   audioFileName String   // Nom du fichier dans Supabase Storage
-  priceStream   Int      @default(200)
-  priceDownload Int      @default(500)
-  status        String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  priceStream   Int      @default(200) // FCFA
+  priceDownload Int      @default(500) // FCFA
+  status        String   @default("PENDING")
+  streamsCount  Int      @default(0)
+  downloadsCount Int     @default(0)
+
+  // Relations
   
   artistId      String
   artist        User     @relation("UserTracks", fields: [artistId], references: [id], onDelete: Cascade)
@@ -87,6 +91,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  password      String?
   image         String?
   phone         String?   // Téléphone du compte Mobile Money principal
   role          String    @default("USER") // USER, ARTIST, ADMIN, PREMIUM

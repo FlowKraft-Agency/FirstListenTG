@@ -43,13 +43,13 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
         <div className="modal-overlay" onClick={onCloseAction}>
             <div className="modal-content animate-fade-in" onClick={e => e.stopPropagation()}>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>Paiement</h3>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.875rem' }}>Achat de l'accès à : <strong style={{ color: '#fff' }}>{trackTitle || 'Titre Exclusif'}</strong></p>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.875rem' }}>Achat de l'accès à : <strong style={{ color: 'var(--text-main)' }}>{trackTitle || 'Titre Exclusif'}</strong></p>
 
                 {error && <p style={{ color: 'var(--error-color)', marginBottom: '1rem', background: 'rgba(229,57,53,0.1)', padding: '0.5rem', borderRadius: '8px' }}>{error}</p>}
 
                 {/* Options de tarification */}
                 <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: accessType === 'STREAM' ? 'rgba(13, 242, 89, 0.1)' : 'rgba(255,255,255,0.05)', border: accessType === 'STREAM' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: accessType === 'STREAM' ? 'var(--primary-alpha-10)' : 'var(--glass-icon-bg)', border: accessType === 'STREAM' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s ease' }}>
                         <input type="radio" name="accessType" value="STREAM" checked={accessType === 'STREAM'} onChange={() => { setAccessType('STREAM'); setAmount(priceStream); }} style={{ accentColor: 'var(--primary-color)', width: '18px', height: '18px' }} />
                         <div style={{ flex: 1, textAlign: 'left' }}>
                             <div style={{ fontWeight: 'bold' }}>Écoute Unique</div>
@@ -61,7 +61,7 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
                     <label
                         style={{
                             display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem',
-                            background: accessType === 'PERMANENT' ? 'rgba(13, 242, 89, 0.1)' : 'rgba(255,255,255,0.05)',
+                            background: accessType === 'PERMANENT' ? 'var(--primary-alpha-10)' : 'var(--glass-icon-bg)',
                             border: accessType === 'PERMANENT' ? '1px solid var(--primary-color)' : '1px solid var(--border-color)',
                             borderRadius: '8px',
                             cursor: isLoggedIn ? 'pointer' : 'not-allowed',

@@ -62,7 +62,7 @@ export default async function BillingPage() {
                     {user?.transactions.map(tx => (
                         <div key={tx.id} style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                <div style={{ padding: '1rem', background: 'rgba(13, 242, 89, 0.1)', borderRadius: '12px', color: 'var(--primary-color)' }}>
+                                <div style={{ padding: '1rem', background: 'var(--primary-alpha-10)', borderRadius: '12px', color: 'var(--primary-color)' }}>
                                     <CreditCard size={24} />
                                 </div>
                                 <div>
@@ -73,7 +73,7 @@ export default async function BillingPage() {
 
                             <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
                                 <p style={{ fontWeight: 'bold', fontSize: '1.125rem' }}>{tx.amount} FCFA</p>
-                                <span style={{ fontSize: '10px', background: 'rgba(13, 242, 89, 0.2)', color: 'var(--success-color)', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>{tx.status}</span>
+                                <span style={{ fontSize: '10px', background: 'var(--primary-alpha-20)', color: 'var(--success-color)', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>{tx.status}</span>
                             </div>
                         </div>
                     ))}

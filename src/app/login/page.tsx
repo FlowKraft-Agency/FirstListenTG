@@ -1,10 +1,44 @@
 'use client';
 
+import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleCredentialsLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const res = await signIn("credentials", {
+                redirect: false,
+                email,
+                password
+            });
+
+            if (res?.error) {
+                setError("Email ou mot de passe incorrect.");
+            } else {
+                router.push('/library');
+                router.refresh();
+            }
+        } catch (err: any) {
+            setError("Une erreur inattendue est survenue.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleGoogleLogin = () => {
         signIn("google", { callbackUrl: "/library" });
     };
@@ -16,10 +50,11 @@ export default function LoginPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'radial-gradient(circle at 50% 50%, rgba(13, 242, 89, 0.15) 0%, rgba(8, 12, 9, 1) 70%)',
-            padding: '1rem'
+            background: 'var(--abstract-gradient)',
+            padding: '1rem',
+            overflowY: 'auto'
         }}>
-            <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '450px', padding: '2.5rem', textAlign: 'center', position: 'relative' }}>
+            <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '450px', padding: '2.5rem', textAlign: 'center', position: 'relative', margin: 'auto' }}>
                 <Link href="/" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', color: 'var(--text-muted)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem' }}>
                     <ArrowLeft size={16} /> Accueil
                 </Link>
@@ -32,8 +67,65 @@ export default function LoginPage() {
                     </svg>
                 </div>
 
-                <h3 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Connexion</h3>
+                <h3 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Connexion</h3>
                 <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Connectez-vous pour écouter vos exclusivités</p>
+
+                <form onSubmit={handleCredentialsLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left', marginBottom: '1.5rem' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Adresse Email</label>
+                        <input
+                            type="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={{ width: '100%', padding: '1rem', borderRadius: '0.75rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none' }}
+                            placeholder="vous@exemple.com"
+                        />
+                    </div>
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Mot de passe</label>
+                        <div style={{ position: 'relative' }}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                style={{ width: '100%', padding: '1rem', paddingRight: '3rem', borderRadius: '0.75rem', background: 'var(--glass-icon-bg)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none' }}
+                                placeholder="••••••••"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
+                    </div>
+
+                    {error && <div style={{ color: '#ef4444', fontSize: '0.875rem', padding: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '0.5rem', textAlign: 'center' }}>{error}</div>}
+
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="btn btn-primary"
+                        style={{ width: '100%', padding: '1.25rem', marginTop: '0.5rem', fontSize: '1rem', display: 'flex', justifyContent: 'center' }}
+                    >
+                        {isLoading ? (
+                            <div style={{ width: '24px', height: '24px', border: '3px solid rgba(0,0,0,0.1)', borderTopColor: '#000', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                        ) : (
+                            "Se connecter"
+                        )}
+                    </button>
+                    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                </form>
+
+                <div style={{ display: 'flex', alignItems: 'center', margin: '2rem 0', color: 'var(--text-muted)' }}>
+                    <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }}></div>
+                    <span style={{ padding: '0 1rem', fontSize: '0.875rem' }}>Ou</span>
+                    <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }}></div>
+                </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
@@ -67,7 +159,7 @@ export default function LoginPage() {
                         style={{
                             width: '100%',
                             background: '#000',
-                            color: '#fff',
+                            color: 'var(--text-main)',
                             border: '1px solid rgba(255,255,255,0.2)',
                             padding: '1.25rem',
                             display: 'flex',
@@ -84,8 +176,8 @@ export default function LoginPage() {
 
                 </div>
 
-                <p style={{ marginTop: '2rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    En vous connectant, vous acceptez nos <br /> conditions d'utilisation
+                <p style={{ marginTop: '2rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                    Pas encore de compte ? <Link href="/register" style={{ color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 600 }}>S'inscrire</Link>
                 </p>
             </div>
         </div>

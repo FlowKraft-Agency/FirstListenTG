@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DollarSign, CheckCircle, Clock } from "lucide-react";
+import { DollarSign, CheckCircle, Clock, PlusCircle } from "lucide-react";
 import TrackActionRow from "./TrackActionRow";
+import Link from "next/link";
 
 export default async function ArtistDashboardPage() {
     const session = await getServerSession(authOptions);
@@ -33,16 +34,22 @@ export default async function ArtistDashboardPage() {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Espace Artiste</h1>
-                <p style={{ color: 'var(--text-muted)', margin: 0 }}>Statistiques et revenus de vos morceaux.</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Espace Artiste</h1>
+                    <p style={{ color: 'var(--text-muted)', margin: 0 }}>Statistiques et revenus de vos morceaux.</p>
+                </div>
+                <Link href="/artist/upload" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.5rem', borderRadius: '0.5rem', textDecoration: 'none' }}>
+                    <PlusCircle size={20} />
+                    Nouveau Son
+                </Link>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ color: 'var(--text-muted)' }}>Mes Gains (Net)</span>
-                        <div style={{ padding: '0.5rem', background: 'rgba(13, 242, 89, 0.1)', borderRadius: '0.5rem', color: 'var(--primary-color)' }}>
+                        <div style={{ padding: '0.5rem', background: 'var(--primary-alpha-10)', borderRadius: '0.5rem', color: 'var(--primary-color)' }}>
                             <DollarSign size={20} />
                         </div>
                     </div>
@@ -81,7 +88,7 @@ export default async function ArtistDashboardPage() {
                         <div style={{ overflowX: 'auto' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
                                 <thead>
-                                    <tr style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                                    <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
                                         <th style={{ padding: '1rem' }}>Pochette</th>
                                         <th style={{ padding: '1rem' }}>Titre</th>
                                         <th style={{ padding: '1rem' }}>Prix (Stream / Définitif)</th>
@@ -111,7 +118,7 @@ export default async function ArtistDashboardPage() {
                         <div style={{ overflowX: 'auto' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
                                 <thead>
-                                    <tr style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                                    <tr style={{ background: 'var(--glass-icon-bg)', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
                                         <th style={{ padding: '1rem' }}>Date</th>
                                         <th style={{ padding: '1rem' }}>Morceau</th>
                                         <th style={{ padding: '1rem' }}>Montant Brut</th>
@@ -121,14 +128,14 @@ export default async function ArtistDashboardPage() {
                                 </thead>
                                 <tbody>
                                     {recentSales.map(sale => (
-                                        <tr key={sale.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                        <tr key={sale.id} style={{ borderBottom: '1px solid var(--glass-icon-bg)' }}>
                                             <td style={{ padding: '1rem', fontSize: '0.875rem' }}>{sale.createdAt.toLocaleDateString('fr-FR')}</td>
                                             <td style={{ padding: '1rem', fontWeight: 600 }}>{sale.trackTitle}</td>
                                             <td style={{ padding: '1rem' }}>{sale.amount} FCFA</td>
                                             <td style={{ padding: '1rem', color: 'var(--primary-color)', fontWeight: 700 }}>{Math.floor(sale.amount * 0.8)} FCFA</td>
                                             <td style={{ padding: '1rem' }}>
                                                 {sale.payoutStatus === 'PAID' ?
-                                                    <span style={{ color: '#0df259', fontSize: '0.875rem', fontWeight: 600 }}>Transféré (MoMo)</span> :
+                                                    <span style={{ color: 'var(--primary-color)', fontSize: '0.875rem', fontWeight: 600 }}>Transféré (MoMo)</span> :
                                                     <span style={{ color: '#eab308', fontSize: '0.875rem', fontWeight: 600 }}>En attente</span>
                                                 }
                                             </td>

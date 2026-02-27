@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { LogOut, Music, Settings, User as UserIcon, Shield, CreditCard, Sliders, Home, Star, LayoutDashboard } from "lucide-react";
+import { LogOut, Music, Settings, User as UserIcon, Shield, CreditCard, Sliders, Home, Star, LayoutDashboard, Search } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function DashboardSidebar() {
     const pathname = usePathname();
@@ -22,6 +23,10 @@ export default function DashboardSidebar() {
                     <Home />
                     <span>Accueil</span>
                 </Link>
+                <Link href="/explore" className={`nav-link ${pathname === '/explore' ? 'active' : ''}`}>
+                    <Search />
+                    <span>Explorer</span>
+                </Link>
                 <Link href="/library" className={`nav-link ${pathname === '/library' ? 'active' : ''}`}>
                     <Music />
                     <span>Ma Musique</span>
@@ -31,10 +36,15 @@ export default function DashboardSidebar() {
                     <span>Profil</span>
                 </Link>
 
-                {(session?.user as any)?.role === 'ARTIST' && (
+                {(session?.user as any)?.role === 'ARTIST' || (session?.user as any)?.role === 'ADMIN' ? (
                     <Link href="/artist" className="nav-link" style={{ color: 'var(--primary-color)' }}>
                         <Star />
                         <span>Studio Artiste</span>
+                    </Link>
+                ) : (
+                    <Link href="/become-artist" className={`nav-link ${pathname === '/become-artist' ? 'active' : ''}`} style={{ color: 'var(--primary-color)' }}>
+                        <Star />
+                        <span>Devenir Artiste</span>
                     </Link>
                 )}
 
@@ -66,6 +76,10 @@ export default function DashboardSidebar() {
                     <LogOut />
                     <span>Déconnexion</span>
                 </a>
+
+                <div className="nav-link" style={{ cursor: 'default', marginTop: 'auto', paddingTop: '1rem' }}>
+                    <ThemeToggle />
+                </div>
             </nav>
         </aside>
     );

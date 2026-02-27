@@ -18,7 +18,13 @@ export default async function LibraryPage() {
         where: { email: session.user.email },
         include: {
             tokens: {
-                include: { transaction: true },
+                include: {
+                    transaction: {
+                        include: {
+                            track: true
+                        }
+                    }
+                },
                 orderBy: { createdAt: 'desc' }
             }
         }
@@ -45,22 +51,37 @@ export default async function LibraryPage() {
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}>
-                                <Music size={48} color="rgba(255,255,255,0.1)" />
+                                {token.transaction.track?.coverImage ? (
+                                    <img src={token.transaction.track.coverImage} alt="Cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                ) : (
+                                    <Music size={48} color="var(--border-color)" />
+                                )}
                                 <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
                                     {token.accessType === 'PERMANENT' ? (
-                                        <span style={{ fontSize: '10px', background: 'rgba(13, 242, 89, 0.2)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>DÉFINITIF</span>
+                                        <span style={{ fontSize: '10px', background: 'var(--primary-alpha-20)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>DÉFINITIF</span>
                                     ) : token.status === 'VALID' && new Date() <= token.expiresAt ? (
-                                        <span style={{ fontSize: '10px', background: 'rgba(13, 242, 89, 0.2)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>30 MIN RESTANTES</span>
+                                        <span style={{ fontSize: '10px', background: 'var(--primary-alpha-20)', color: 'var(--primary-color)', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>30 MIN RESTANTES</span>
                                     ) : (
-                                        <span style={{ fontSize: '10px', background: 'rgba(255,255,255,0.1)', color: '#888', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>EXPIRÉ</span>
+                                        <span style={{ fontSize: '10px', background: 'var(--border-color)', color: '#888', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>EXPIRÉ</span>
                                     )}
                                 </div>
                             </div>
 
                             <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                 <div>
-                                    <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '4px' }}>Titre Exclusif</h3>
-                                    <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Artiste Mystère</p>
+                                    <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                        {token.transaction.track?.title || "Titre inconnu"}
+                                    </h3>
+                                    {token.transaction.track?.artistName ? (
+                                        <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                                            <Link href={`/a/${encodeURIComponent(token.transaction.track.artistName)}`} className="hover-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
+                                                {token.transaction.track.artistName}
+                                            </Link>
+                                        </p>
+                                    ) : (
+                                        <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Artiste inconnu</p>
+                                    )}
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '8px' }}>Acheté le {token.createdAt.toLocaleDateString('fr-FR')}</p>
                                 </div>
                                 <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={{ fontSize: '10px', color: '#666', fontFamily: 'monospace' }}>ID: {token.id.split('-')[0].toUpperCase()}</span>
