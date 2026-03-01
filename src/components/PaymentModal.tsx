@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export default function PaymentModal({ onCloseAction, trackTitle, trackId, priceStream = 200, priceDownload = 500, isLoggedIn }: { onCloseAction: () => void, trackTitle?: string | null, trackId?: string | null, priceStream?: number, priceDownload?: number, isLoggedIn: boolean }) {
     const [phone, setPhone] = useState('');
@@ -10,7 +11,41 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
     const [amount, setAmount] = useState(priceStream);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [waitingConfirmation, setWaitingConfirmation] = useState(false);
+    const [transactionId, setTransactionId] = useState<string | null>(null);
+    const [paymentTokenId, setPaymentTokenId] = useState<string | null>(null);
     const router = useRouter();
+
+    useEffect(() => {
+        let intervalId: ReturnType<typeof setInterval>;
+
+        if (waitingConfirmation && transactionId && paymentTokenId) {
+            // Polling pour vérifier le statut de la transaction
+            intervalId = setInterval(async () => {
+                try {
+                    const res = await fetch(`/api/payment/status?id=${transactionId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.status === 'SUCCESS') {
+                            clearInterval(intervalId);
+                            router.push(`/player/${paymentTokenId}`);
+                        } else if (data.status === 'FAILED') {
+                            clearInterval(intervalId);
+                            setError("Le paiement a échoué ou a été annulé.");
+                            setWaitingConfirmation(false);
+                            setLoading(false);
+                        }
+                    }
+                } catch (err) {
+                    console.error("Polling error", err);
+                }
+            }, 3000); // Check every 3 seconds
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+        };
+    }, [waitingConfirmation, transactionId, paymentTokenId, router]);
 
     const handlePayment = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,17 +62,43 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
             const data = await res.json();
 
             if (res.ok && data.success) {
-                // Redirection vers le lecteur via le token unique généré
-                router.push(data.link);
+                // On a initié le paiement, on attend la confirmation USSD
+                setTransactionId(data.transactionId);
+                setPaymentTokenId(data.token);
+                setWaitingConfirmation(true);
             } else {
-                setError(data.error || 'Erreur lors du paiement');
+                setError(data.error || 'Erreur lors de l\'initiation du paiement');
+                setLoading(false);
             }
         } catch (err) {
-            setError('Erreur de connexion');
-        } finally {
+            setError('Erreur de connexion au serveur');
             setLoading(false);
         }
     };
+
+    if (waitingConfirmation) {
+        return (
+            <div className="modal-overlay">
+                <div className="modal-content animate-fade-in" style={{ textAlign: 'center', padding: '3rem 2rem' }}>
+                    <Loader2 size={48} className="animate-spin" style={{ color: 'var(--primary-color)', margin: '0 auto var(--space-xl)' }} />
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: 'var(--space-sm)' }}>Confirmation requise</h3>
+                    <p style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-xl)' }}>
+                        Veuillez consulter votre téléphone ({phone}) et entrer votre code secret {network} pour valider le paiement de {amount} FCFA.
+                    </p>
+                    <p style={{ fontSize: '0.875rem', color: 'var(--primary-color)', fontWeight: 500, animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>
+                        En attente de la validation opérateur...
+                    </p>
+                    <button
+                        className="btn btn-secondary"
+                        style={{ marginTop: 'var(--space-2xl)' }}
+                        onClick={() => { setWaitingConfirmation(false); setLoading(false); }}
+                    >
+                        Annuler / Réessayer
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="modal-overlay" onClick={onCloseAction}>
@@ -98,7 +159,6 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
                         >
                             <option value="FLOOZ">Moov Money (Flooz)</option>
                             <option value="TMONEY">T-Money</option>
-                            <option value="MIXX">Mixx by Yas</option>
                         </select>
                     </div>
 
@@ -115,11 +175,11 @@ export default function PaymentModal({ onCloseAction, trackTitle, trackId, price
                     </div>
 
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                        <button type="button" className="btn btn-secondary" onClick={onCloseAction} style={{ flex: 1 }}>
+                        <button type="button" className="btn btn-secondary" disabled={loading} onClick={onCloseAction} style={{ flex: 1 }}>
                             Annuler
                         </button>
                         <button type="submit" className="btn btn-primary" disabled={loading} style={{ flex: 1 }}>
-                            {loading ? 'Traitement...' : 'Payer'}
+                            {loading ? 'Initiation...' : 'Payer'}
                         </button>
                     </div>
                 </form>

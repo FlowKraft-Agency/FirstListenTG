@@ -19,7 +19,11 @@ export default async function LibraryPage() {
                 include: {
                     transaction: {
                         include: {
-                            track: true
+                            track: {
+                                include: {
+                                    artist: true
+                                }
+                            }
                         }
                     }
                 },
@@ -43,6 +47,11 @@ export default async function LibraryPage() {
                 title: token.transaction.track.title,
                 artistName: token.transaction.track.artistName,
                 coverImage: token.transaction.track.coverImage,
+                priceStream: token.transaction.track.priceStream,
+                priceDownload: token.transaction.track.priceDownload,
+                artist: {
+                    name: token.transaction.track.artist?.name || null,
+                },
             } : null,
         }
     }));

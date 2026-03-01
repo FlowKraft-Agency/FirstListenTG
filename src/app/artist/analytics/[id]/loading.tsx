@@ -1,7 +1,8 @@
-export default function ArtistLoading() {
+export default function ArtistAnalyticsLoading() {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', padding: 'var(--space-md)' }}>
-            <div className="skeleton" style={{ width: '250px', height: '40px', marginBottom: 'var(--space-sm)' }} />
+        <div className="container" style={{ maxWidth: '1000px' }}>
+            <div className="skeleton" style={{ width: '250px', height: '32px', marginBottom: 'var(--space-md)' }} />
+            <div className="skeleton" style={{ width: '80%', height: '24px', marginBottom: 'var(--space-2xl)' }} />
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)' }}>
                 {[1, 2, 3].map(i => (
@@ -15,12 +16,8 @@ export default function ArtistLoading() {
                 ))}
             </div>
 
-            <div className="skeleton" style={{ width: '200px', height: '32px', marginBottom: 'var(--space-md)' }} />
-            <div className="glass-panel" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
-                <div className="skeleton" style={{ width: '100%', height: '56px', borderRadius: '0', borderBottom: '1px solid var(--border-color)' }} />
-                {[1, 2, 3, 4, 5].map(i => (
-                    <div key={i} className="skeleton" style={{ width: '100%', height: '64px', borderRadius: '0', borderBottom: i < 5 ? '1px solid var(--border-color)' : 'none' }} />
-                ))}
+            <div className="glass-panel" style={{ padding: 'var(--space-lg)', borderRadius: 'var(--radius-lg)', height: '400px' }}>
+                <div className="skeleton" style={{ width: '100%', height: '100%', borderRadius: 'var(--radius-md)' }} />
             </div>
         </div>
     );

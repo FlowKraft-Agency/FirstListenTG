@@ -156,28 +156,6 @@ export default function LoginPage() {
                         </svg>
                         Continuer avec Google
                     </button>
-
-                    <button
-                        onClick={() => alert('Apple Login en cours de configuration')}
-                        className="btn btn-secondary"
-                        style={{
-                            width: '100%',
-                            background: '#000',
-                            color: '#fff',
-                            border: '1px solid rgba(255,255,255,0.15)',
-                            padding: '1.125rem',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            gap: '12px',
-                            transition: 'all var(--transition-fast)',
-                        }}
-                    >
-                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.05 20.28c-.96.95-2.44.8-4.02 0-1.56-.81-2.53-.81-4.07 0-1.61.84-2.82.91-3.83 0-3.32-2.91-3.66-8.11-1.04-10.99 1.29-1.44 2.89-2.28 4.41-2.28 1.52 0 2.27.56 3.48.56 1.18 0 1.96-.56 3.48-.56 1.48 0 2.9.84 4.14 2.28-3.04 1.77-2.53 6.03.5 7.42-.71 1.76-1.76 3.46-3.05 4.57zm-4.32-15.34c.05-.01.1-.02.15-.02.04 0 .09 0 .14.01.07-.48.27-.96.6-1.39.46-.61 1.13-1.08 1.83-1.22-.05.51-.23 1.01-.53 1.45-.48.71-1.26 1.25-2.09 1.39-.19-.08-.36-.16-.5-.22z" />
-                        </svg>
-                        Continuer avec Apple
-                    </button>
                 </div>
 
                 <p style={{ marginTop: '2rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>

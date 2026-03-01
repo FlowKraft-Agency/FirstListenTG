@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import CustomAudioPlayer from '@/components/CustomAudioPlayer';
-import { XCircle, CheckCircle, ArrowLeft, Info, Music } from 'lucide-react';
+import { XCircle, CheckCircle, ArrowLeft, Music } from 'lucide-react';
 import Link from 'next/link';
 import ShareButton from './ShareButton';
 
@@ -38,10 +38,10 @@ export default async function PlayerPage({ params }: { params: Promise<{ token: 
     }
 
     return (
-        <main style={{ maxWidth: '1152px', margin: '0 auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 80px)' }}>
+        <main className="player-page">
 
             <div style={{ width: '100%', marginBottom: '2rem' }}>
-                <Link href="/library" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.875rem' }}>
+                <Link href="/library" className="player-page__back">
                     <ArrowLeft size={16} /> Retour à la bibliothèque
                 </Link>
             </div>
@@ -60,7 +60,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ token: 
             {tokenRecord.transaction.track && (
                 <div style={{ width: '100%', maxWidth: '896px', marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-                    <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                    <div className="glass-panel player-page__info">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '48px', height: '48px', background: 'var(--glass-icon-bg)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
                                 <Music size={24} />
@@ -104,7 +104,7 @@ function ErrorState({ message, detail }: { message: string, detail?: string }) {
             {detail && <p style={{ color: 'var(--text-muted)' }}>{detail}</p>}
 
             <a href="/" className="btn btn-secondary" style={{ marginTop: '2rem', textDecoration: 'none' }}>
-                Retour à l'accueil
+                Retour à l&apos;accueil
             </a>
         </main>
     );

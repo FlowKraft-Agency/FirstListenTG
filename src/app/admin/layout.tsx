@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboard, Music, DollarSign, LogOut, Users } from "lucide-react";
+import StudioMobileNav from "@/components/StudioMobileNav";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
     const session = await getServerSession(authOptions);
@@ -13,6 +14,16 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
     return (
         <div className="studio-layout">
+            <StudioMobileNav
+                logoText={<>First<span style={{ color: '#ef4444' }}>Admin</span></>}
+                links={[
+                    { href: '/admin', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
+                    { href: '/admin/tracks', label: 'Modération Sons', icon: <Music size={20} /> },
+                    { href: '/admin/payouts', label: 'Payouts Artistes', icon: <DollarSign size={20} /> },
+                    { href: '/admin/users', label: 'Utilisateurs', icon: <Users size={20} /> },
+                ]}
+            />
+
             <aside className="studio-sidebar">
                 <div className="studio-sidebar__logo">
                     <span className="studio-sidebar__logo-text">
@@ -36,7 +47,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 </nav>
 
                 <div style={{ padding: 'var(--space-lg) var(--space-xl)', borderTop: '1px solid var(--border-color)', marginTop: 'auto' }}>
-                    <Link href="/" className="studio-sidebar__link" style={{ color: 'var(--error-color)', padding: '0.5rem 0' }}>
+                    <Link href="/signout" className="studio-sidebar__link" style={{ color: 'var(--error-color)', padding: '0.5rem 0' }}>
                         <LogOut size={20} /> Quitter Admin
                     </Link>
                 </div>

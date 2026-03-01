@@ -71,6 +71,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/login', // Redirection vers notre page personnalisée
+    signOut: '/signout',
   },
   secret: process.env.NEXTAUTH_SECRET || "FirstListenTGDemoSecret1234!!",
 };
